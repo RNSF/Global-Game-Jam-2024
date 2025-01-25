@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlu6sfs58qdfd"]
+[gd_scene load_steps=4 format=3 uid="uid://dlu6sfs58qdfd"]
 
 [ext_resource type="Texture2D" uid="uid://dce65ud1fbc71" path="res://temp_assets/bottle.png" id="1_7ri3n"]
 [ext_resource type="Script" path="res://Bottle.cs" id="1_uy06r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgcia"]
 size = Vector2(56.5, 245)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_kktpo"]
 
 [node name="Bottle" type="RigidBody2D"]
 input_pickable = true
@@ -20,15 +18,3 @@ shape = SubResource("RectangleShape2D_sgcia")
 position = Vector2(3, 5)
 scale = Vector2(0.19625, 0.19625)
 texture = ExtResource("1_7ri3n")
-
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(4, -65)
-node_a = NodePath("..")
-node_b = NodePath("StaticBody2D")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="PinJoint2D"]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PinJoint2D/StaticBody2D"]
-shape = SubResource("CircleShape2D_kktpo")

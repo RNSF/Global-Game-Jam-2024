@@ -6,6 +6,6 @@
 script = ExtResource("1_me3v1")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-node_b = NodePath("../Unused")
+node_b = NodePath("../BodyJoint")
 
-[node name="Unused" type="StaticBody2D" parent="."]
+[node name="BodyJoint" type="StaticBody2D" parent="."]
