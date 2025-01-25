@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc0n8wgdkc85y"]
+
+[ext_resource type="Script" path="res://Mouse.cs" id="1_me3v1"]
+
+[node name="Mouse" type="Node2D"]
+script = ExtResource("1_me3v1")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_b = NodePath("../Unused")
+
+[node name="Unused" type="StaticBody2D" parent="."]

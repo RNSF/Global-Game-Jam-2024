@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqm15qcln6w26"]
+
+[ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_l5e8w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h27j5"]
+size = Vector2(883, 141)
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Bottle" parent="." instance=ExtResource("1_l5e8w")]
+
+[node name="Table" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+position = Vector2(-0.5, 204.5)
+shape = SubResource("RectangleShape2D_h27j5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
