@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=9 format=3 uid="uid://dqm15qcln6w26"]
 
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_l5e8w"]
 [ext_resource type="PackedScene" uid="uid://cc0n8wgdkc85y" path="res://mouse.tscn" id="2_gaf3q"]
 [ext_resource type="PackedScene" uid="uid://b1utibb208qk0" path="res://soda_fluid.tscn" id="3_3a48s"]
 [ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eixp"]
+size = Vector2(1967, 673)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d71ei"]
 size = Vector2(144.875, 251.5)
@@ -15,6 +18,14 @@ size = Vector2(2003, 151.5)
 size = Vector2(1323, 247)
 
 [node name="GameScene" type="Node2D"]
+
+[node name="Bar" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bar"]
+position = Vector2(0.5, 206.5)
+shape = SubResource("RectangleShape2D_1eixp")
 
 [node name="Bottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
 position = Vector2(-481, 157)

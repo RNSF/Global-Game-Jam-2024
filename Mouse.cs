@@ -108,6 +108,10 @@ public partial class Mouse : Node2D
 			bottle.isPickedUp = gravLevel != Grab.NONE;
 		}
 
+		if (body is Glass glass) {
+			glass.isPickedUp = gravLevel != Grab.NONE;
+		}
+
 		if (body is RigidBody2D rigidBody) {
 			rigidBody.LockRotation = gravLevel == Grab.STRONG;
 		}

@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cber3u6bpcuqp"]
+[gd_scene load_steps=3 format=3 uid="uid://cber3u6bpcuqp"]
 
 [ext_resource type="Texture2D" uid="uid://d21kyf4yx36ga" path="res://temp_assets/glass.svg" id="1_407o4"]
+[ext_resource type="Script" path="res://Glass.cs" id="1_svax4"]
 
 [node name="Glass" type="RigidBody2D"]
 collision_layer = 24
 collision_mask = 24
+script = ExtResource("1_svax4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.47451)
@@ -14,9 +16,16 @@ texture = ExtResource("1_407o4")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-52, -94, -43, 70, -3, 78, 39, 72, 54, -93, 66, -95, 53, 95, -51, 95, -65, -95)
 
-[node name="Pickupable" type="Area2D" parent="."]
+[node name="OuterArea" type="Area2D" parent="."]
 collision_layer = 64
-collision_mask = 0
+collision_mask = 4
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Pickupable"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OuterArea"]
 polygon = PackedVector2Array(-52, -94, 54, -93, 66, -95, 53, 95, -51, 95, -65, -95)
+
+[node name="InnerArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 4
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="InnerArea"]
+polygon = PackedVector2Array(-57, -83, 57, -83, 48, 84, -45, 84)

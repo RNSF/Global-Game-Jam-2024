@@ -25,6 +25,8 @@ public partial class Bottle : RigidBody2D
 		get => GetNode<Node2D>("FluidSpawnPoint");
 	}
 
+	
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
@@ -41,6 +43,5 @@ public partial class Bottle : RigidBody2D
 		} else {
 			pourTimer += 1.0f / pourRate;
 		}
-		
 	}
 }
