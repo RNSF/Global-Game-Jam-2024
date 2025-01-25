@@ -8,3 +8,32 @@ Burgalars you can shoot with the soda bottles
 
 
 
+
+
+
+
+List of assets:
+- Bottles
+- Customers
+- Burgalar
+- Bubbles / Drink Streams
+
+
+Sounds Effects:
+- Contact sounds between bottles, glasses and wooden table
+- Glass/bottle break sound
+
+- Customer grunts (ordering)
+- Customer ARRRGGH (for when they are sprayed with soda)
+- Success sound (ka-ching)
+- Glass filling up sound (should be repeating, can modulate pitch in engine)
+- Bottle shaking sound
+- Soda fizzing sound
+- Menu sliding
+
+
+Saloon music.
+
+
+
+

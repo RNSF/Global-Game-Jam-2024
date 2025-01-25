@@ -1,45 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=8 format=3 uid="uid://dqm15qcln6w26"]
 
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_l5e8w"]
 [ext_resource type="PackedScene" uid="uid://cc0n8wgdkc85y" path="res://mouse.tscn" id="2_gaf3q"]
+[ext_resource type="PackedScene" uid="uid://b1utibb208qk0" path="res://soda_fluid.tscn" id="3_3a48s"]
+[ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d71ei"]
-size = Vector2(207.5, 141)
+size = Vector2(144.875, 251.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8yfq"]
+size = Vector2(2003, 151.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h27j5"]
-size = Vector2(660, 143)
+size = Vector2(1323, 247)
 
 [node name="GameScene" type="Node2D"]
 
-[node name="Bottle" parent="." instance=ExtResource("1_l5e8w")]
-position = Vector2(-314, 142)
+[node name="Bottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
+position = Vector2(-481, 157)
+sodaFluid = NodePath("../SodaFluid")
 
-[node name="Bottle5" parent="." instance=ExtResource("1_l5e8w")]
-position = Vector2(-254, 146)
+[node name="Bottle5" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
+position = Vector2(-368, 168)
+sodaFluid = NodePath("../SodaFluid")
 
-[node name="Bottle2" parent="." instance=ExtResource("1_l5e8w")]
-position = Vector2(-377, 144)
+[node name="Bottle2" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
+position = Vector2(-604, 156)
+sodaFluid = NodePath("../SodaFluid")
 
-[node name="Bottle3" parent="." instance=ExtResource("1_l5e8w")]
-position = Vector2(-439, 145)
+[node name="Bottle3" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
+position = Vector2(-709, 168)
+sodaFluid = NodePath("../SodaFluid")
 
-[node name="Bottle4" parent="." instance=ExtResource("1_l5e8w")]
-position = Vector2(-503, 146)
+[node name="Bottle4" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
+position = Vector2(-806, 166)
+sodaFluid = NodePath("../SodaFluid")
 
 [node name="Table" type="StaticBody2D" parent="."]
+collision_layer = 17
+collision_mask = 17
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Table"]
-position = Vector2(-637, 210)
+position = Vector2(-938.438, 280)
 shape = SubResource("RectangleShape2D_d71ei")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Table"]
-position = Vector2(-239, 347)
-shape = SubResource("RectangleShape2D_h27j5")
+position = Vector2(-0.5, 464.25)
+shape = SubResource("RectangleShape2D_s8yfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
-position = Vector2(111, 205.5)
+position = Vector2(362.5, 282.5)
 shape = SubResource("RectangleShape2D_h27j5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Mouse" parent="." instance=ExtResource("2_gaf3q")]
+
+[node name="SodaFluid" parent="." instance=ExtResource("3_3a48s")]
+
+[node name="Glass" parent="." instance=ExtResource("4_oecaf")]

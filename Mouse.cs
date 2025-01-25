@@ -34,28 +34,36 @@ public partial class Mouse : Node2D
 	public Grab GrabLevel {
 		get => _grabLevel;
 		set {
+			bool wasGrabbing = GrabLevel != Grab.NONE;
 			if (value == _grabLevel) return;
 			_grabLevel = value;
-			
-			switch (_grabLevel) {
-				case Grab.NONE: {
-					Body = null;
-				} break;
+			bool isGrabbing = GrabLevel != Grab.NONE;
 
-				case Grab.WEAK: {
-					var state = GetWorld2D().DirectSpaceState;
-					var query = new PhysicsPointQueryParameters2D();
-					query.CollisionMask = CollisionLayers.BOTTLES;
-					query.Position = PinJoint.GlobalPosition;
-					var result = state.IntersectPoint(query);
-					if (result.Count == 0) return;
-					Body = result[0]["collider"].As<PhysicsBody2D>();
-				} break;
-
-				case Grab.STRONG: {
-
-				} break;
+			if (wasGrabbing && !isGrabbing) {
+				Body = null;
 			}
+
+			if (isGrabbing && !wasGrabbing) {
+				var state = GetWorld2D().DirectSpaceState;
+				var query = new PhysicsPointQueryParameters2D();
+				query.CollideWithAreas = true;
+				query.CollideWithBodies = true;
+				query.CollisionMask = CollisionLayers.GRABBABLE;
+				query.Position = PinJoint.GlobalPosition;
+				var result = state.IntersectPoint(query);
+				if (result.Count == 0) return;
+
+				var collider = result[0]["collider"];
+				if (collider.Obj is PhysicsBody2D) {
+					Body = collider.As<PhysicsBody2D>();
+				} else if (collider.Obj is Area2D) {
+					Body = collider.As<Area2D>().GetParent<PhysicsBody2D>();
+				} else {
+					Body = null;
+				}
+			}
+
+			SetBodyMode(Body, GrabLevel);
 		}
 	}
 
@@ -67,8 +75,12 @@ public partial class Mouse : Node2D
     public PhysicsBody2D Body { 
 		get => PinJoint.NodeA != "" ? GetTree().Root.GetNode<PhysicsBody2D>(PinJoint.NodeA) : null; 
 		set {
+			SetBodyMode(Body, Grab.NONE);
+
 			if (value != null) 	PinJoint.NodeA = value.GetPath();
 			else 		 		PinJoint.NodeA = null;
+
+			SetBodyMode(Body, GrabLevel);
 		} 	
 	}
 
@@ -89,5 +101,15 @@ public partial class Mouse : Node2D
 
 	public Grab CalculateGrabLevel() {
 		return (Grab) ((IsLeftPressed ? 1 : 0) + (IsRightPressed ? 1 : 0));
+	}
+
+	public void SetBodyMode(PhysicsBody2D body, Grab gravLevel) {
+		if (body is Bottle bottle) {
+			bottle.isPickedUp = gravLevel != Grab.NONE;
+		}
+
+		if (body is RigidBody2D rigidBody) {
+			rigidBody.LockRotation = gravLevel == Grab.STRONG;
+		}
 	}
 }
