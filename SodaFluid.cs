@@ -1,43 +1,54 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-struct FluidParticle {
-	public Rid body;
-	public Rid canvasItem;
-}
+
 
 public partial class SodaFluid : Node2D
 {
 	
-	const float PARTICLE_RADIUS = 6.0f;
-	Rid particleShape;
-	System.Collections.Generic.List<FluidParticle> particles = new System.Collections.Generic.List<FluidParticle>();
+	public struct Particle {
+		public Rid body;
+		public Rid canvasItem;
+		public float[] sodaComposition;
+	}
+
+	const float MIN_PARTICLE_RADIUS = 6.0f;
+	const float MAX_PARTICLE_RADIUS = 9.0f;
+	public Dictionary<Rid, Particle> bodyToParticle = new Dictionary<Rid, Particle>();
 	
+	CanvasGroup SodaCanvasGroup {
+		get => GetNode<CanvasGroup>("CanvasGroup");
+	}
 
     public override void _Ready() {
-        particleShape = PhysicsServer2D.CircleShapeCreate();
-		PhysicsServer2D.ShapeSetData(particleShape, PARTICLE_RADIUS);
+        
     }
 
     public override void _PhysicsProcess(double delta) {
 
 		if (Input.IsActionPressed("debug_1")) {
-			CreateParticle(GetGlobalMousePosition());
+			CreateParticle(GetGlobalMousePosition(), Soda.Type.CRANBERRY);
 		}
 
-		foreach(var particle in particles) {
+		foreach(var particle in bodyToParticle.Values) {
 			var particleTransform = PhysicsServer2D.BodyGetState(particle.body, PhysicsServer2D.BodyState.Transform).As<Transform2D>();
 			particleTransform.Origin = particleTransform.Origin - GlobalPosition;
 			RenderingServer.CanvasItemSetTransform(particle.canvasItem, particleTransform);
 		}
 	}
 
-	public void CreateParticle(Vector2 particlePosition) {
+	public void CreateParticle(Vector2 particlePosition, Soda.Type sodaType) {
 		// based on https://github.com/Chevifier/Fluid-Simulation-in-Godot/blob/main/FluidSim2D/WaterGenPhysicsServer.gd
 
 		if (!IsNodeReady()) return;
+
+		Rid particleShape = PhysicsServer2D.CircleShapeCreate();
+		Random rng = new Random();
+		float particleRadius = Mathf.Lerp(MIN_PARTICLE_RADIUS, MAX_PARTICLE_RADIUS, ((float)rng.NextDouble()));
+		PhysicsServer2D.ShapeSetData(particleShape, particleRadius);
 
 		Transform2D particleTransform = Transform2D.Identity.Translated(particlePosition);
 
@@ -53,13 +64,14 @@ public partial class SodaFluid : Node2D
 		PhysicsServer2D.BodySetState(body, PhysicsServer2D.BodyState.Transform, particleTransform);
 
 		var canvasItem = RenderingServer.CanvasItemCreate();
-		RenderingServer.CanvasItemSetParent(canvasItem, GetCanvasItem());
+		RenderingServer.CanvasItemSetParent(canvasItem, SodaCanvasGroup.GetCanvasItem());
 		RenderingServer.CanvasItemSetTransform(canvasItem, particleTransform);
-		RenderingServer.CanvasItemAddCircle(canvasItem, Vector2.Zero, PARTICLE_RADIUS + 3, Colors.White, true);
+		RenderingServer.CanvasItemAddCircle(canvasItem, Vector2.Zero, particleRadius * 2.0f, Colors.White, true);
+		RenderingServer.CanvasItemSetModulate(canvasItem, Soda.GetColor(sodaType));
 
-		var particle = new FluidParticle {body = body, canvasItem = canvasItem};
-		particles.Add(particle);
-
-		
+		float[] sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
+		sodaComposition[(int) sodaType] = 1.0f;
+		var particle = new Particle {body = body, canvasItem = canvasItem, sodaComposition = sodaComposition};
+		bodyToParticle.Add(body, particle);
 	}
 }

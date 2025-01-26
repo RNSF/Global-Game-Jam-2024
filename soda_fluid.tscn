@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1utibb208qk0"]
+[gd_scene load_steps=4 format=3 uid="uid://b1utibb208qk0"]
 
 [ext_resource type="Script" path="res://SodaFluid.cs" id="1_w7bq5"]
+[ext_resource type="Shader" path="res://soda_fluid.gdshader" id="2_1gsdi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ynn"]
+shader = ExtResource("2_1gsdi")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
 
 [node name="SodaFluid" type="Node2D"]
 script = ExtResource("1_w7bq5")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_l2ynn")

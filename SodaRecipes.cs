@@ -91,4 +91,15 @@ public partial class Soda : Node
 			case Fizz.EXTRA: return "Extra Fizz";
 		}
 	}
+
+	static public Color GetColor(Type type) {
+		switch(type) {
+			default:
+			case Type.CLUB: return Colors.LightGray;
+			case Type.CRANBERRY: return Colors.DarkRed;
+			case Type.ORANGE: return Colors.Orange;
+			case Type.GINGER: return Colors.Beige;
+			case Type.MAGIC: return Colors.Black;
+		}
+	}
 }

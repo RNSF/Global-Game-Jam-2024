@@ -50,6 +50,7 @@ shape = SubResource("RectangleShape2D_1eixp")
 [node name="Bottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
 position = Vector2(-481, 157)
 sodaFluid = NodePath("../SodaFluid")
+sodaType = 1
 
 [node name="Bottle5" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
 position = Vector2(-368, 168)
@@ -58,14 +59,17 @@ sodaFluid = NodePath("../SodaFluid")
 [node name="Bottle2" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
 position = Vector2(-604, 156)
 sodaFluid = NodePath("../SodaFluid")
+sodaType = 2
 
 [node name="Bottle3" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
 position = Vector2(-709, 168)
 sodaFluid = NodePath("../SodaFluid")
+sodaType = 3
 
 [node name="Bottle4" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
 position = Vector2(-806, 166)
 sodaFluid = NodePath("../SodaFluid")
+sodaType = 4
 
 [node name="Table" type="StaticBody2D" parent="."]
 collision_layer = 17
@@ -87,7 +91,8 @@ shape = SubResource("RectangleShape2D_h27j5")
 
 [node name="SodaFluid" parent="." instance=ExtResource("3_3a48s")]
 
-[node name="Glass" parent="." instance=ExtResource("4_oecaf")]
+[node name="Glass" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+sodaFluid = NodePath("../SodaFluid")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-12, -89)

@@ -7,6 +7,9 @@ public partial class Bottle : RigidBody2D
 
 	[Export]
 	public SodaFluid sodaFluid;
+
+	[Export]
+	public Soda.Type sodaType;
 	public bool isPickedUp;
 	
 	public bool isHovered = false;
@@ -37,7 +40,7 @@ public partial class Bottle : RigidBody2D
 				pourTimer += 1.0f / pourRate;
 			}
 
-			sodaFluid.CreateParticle(FluidSpawnPoint.GlobalPosition);
+			sodaFluid.CreateParticle(FluidSpawnPoint.GlobalPosition,sodaType);
 
 			ApplyImpulse(-Vector2.Right.Rotated(GlobalRotation) * 5.0f);
 		} else {

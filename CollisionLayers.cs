@@ -11,6 +11,7 @@ public partial class CollisionLayers : Node
 
 	public const uint FLUID 		= (1 << 5);
 	public const uint GRABBABLE 	= (1 << 6);
+	public const uint INNER_GLASS = (1 << 7);
 	
 
 
