@@ -20,8 +20,13 @@ public partial class Glass : RigidBody2D
 	private CollisionPolygon2D InnerAreaShape {
 		get => GetNode<CollisionPolygon2D>("InnerArea/CollisionPolygon2D");
 	}
+	
+	private bool isOnBar = false;
+	private bool isBehindBar = false;
 
 	ConvexPolygonShape2D innerShape;
+	public float[] sodaComposition;
+	public float sodaVolume;
 
 
     public override void _Ready()
@@ -34,7 +39,7 @@ public partial class Glass : RigidBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
 	{
-		var isBehindBar = InnerArea.GetOverlappingBodies().Any((Node2D node) => {
+		isBehindBar = InnerArea.GetOverlappingBodies().Any((Node2D node) => {
 			if (node is PhysicsBody2D body) {
 				return (body.CollisionMask & CollisionLayers.BAR) != 0;
 			}
@@ -57,7 +62,8 @@ public partial class Glass : RigidBody2D
 		query.Transform = GlobalTransform;
 		var results = state.IntersectShape(query, 300);
 
-		float[] sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
+		sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
+		sodaVolume = 0.0f;
 
 		foreach (var result in results) {
 			Rid rid = result["rid"].As<Rid>();
@@ -65,32 +71,54 @@ public partial class Glass : RigidBody2D
 			SodaFluid.Particle particle = sodaFluid.bodyToParticle[rid];
 
 			for (int i = 0; i < sodaComposition.Count(); i++) {
-				sodaComposition[i] += particle.sodaComposition[i];
+				float volume = particle.radius * particle.radius;
+				sodaVolume += volume;
+				sodaComposition[i] += particle.sodaComposition[i] * volume;
 			}
-			
 		}
 
-		GD.Print(sodaComposition[0]);
-
-		for (int i = 0; i < sodaComposition.Count(); i++) {
-			sodaComposition[i] /= results.Count();
-		}
-
-		foreach (var result in results) {
-			Rid rid = result["rid"].As<Rid>();
-			SodaFluid.Particle particle = sodaFluid.bodyToParticle[rid];
-			Color color = Colors.Black;
-
+		if (sodaVolume > 0) {
 			for (int i = 0; i < sodaComposition.Count(); i++) {
-				particle.sodaComposition[i] = sodaComposition[i];
-				color += particle.sodaComposition[i] * Soda.GetColor((Soda.Type) i);
+				sodaComposition[i] /= sodaVolume;
 			}
 
-			
-			RenderingServer.CanvasItemSetModulate(particle.canvasItem, color);
+			foreach (var result in results) {
+				Rid rid = result["rid"].As<Rid>();
+				SodaFluid.Particle particle = sodaFluid.bodyToParticle[rid];
+				Color color = Colors.Black;
+
+				for (int i = 0; i < sodaComposition.Count(); i++) {
+					particle.sodaComposition[i] = sodaComposition[i];
+					color += particle.sodaComposition[i] * Soda.GetColor((Soda.Type) i);
+				}
+
+				
+				RenderingServer.CanvasItemSetModulate(particle.canvasItem, color);
+			}
 		}
 
 	}
 
+    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+    {
+		isOnBar = false;
+		for (var i = 0; i < state.GetContactCount(); i++) {
+			
+			var obj = state.GetContactColliderObject(i);
+			if (obj is PhysicsBody2D physicsBody2D) {
+				if ((physicsBody2D.CollisionLayer & CollisionLayers.BAR) == 0) continue;
+				isOnBar = isOnBar || state.GetContactLocalNormal(i).Dot(Vector2.Up) > 0.9;
+			}
+		}
+        
+    }
+
+    public bool CanServe() {
+		return !isBehindBar && isOnBar && Mathf.AngleDifference(GlobalRotation, 0) < 0.05;
+	}
+
+	public void Destroy() {
+
+	}
 	
 }

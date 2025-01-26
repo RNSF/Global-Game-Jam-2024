@@ -53,7 +53,7 @@ sodaFluid = NodePath("../SodaFluid")
 sodaType = 1
 
 [node name="Bottle5" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
-position = Vector2(-368, 168)
+position = Vector2(-367, 164)
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="Bottle2" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
@@ -92,6 +92,9 @@ shape = SubResource("RectangleShape2D_h27j5")
 [node name="SodaFluid" parent="." instance=ExtResource("3_3a48s")]
 
 [node name="Glass" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+position = Vector2(-5, 37)
+contact_monitor = true
+max_contacts_reported = 6
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="Camera2D" type="Camera2D" parent="."]

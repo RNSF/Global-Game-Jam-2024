@@ -38,12 +38,37 @@ public partial class Npc : Node2D
 		}
 	}
 
+	private PlacementZone PlacementArea {
+		get => GetNode<PlacementZone>("PlacementZone");
+	}
+
 	private OrderBubble SpeachBubble {
 		get => GetNode<OrderBubble>("OrderBubble");
 	}
 
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Ready()
+    {
+        PlacementArea.GlassServed += (glass) => {
+			var compositionDistance = 0.0f;
+			var idealComposition = Soda.GetComposition(cocktail);
+			
+			for (var i = 0; i < idealComposition.Length; i++) {
+				compositionDistance += Mathf.Abs(idealComposition[i] - glass.sodaComposition[i]);
+			}
+
+			compositionDistance = Mathf.Clamp(compositionDistance, 0.0f, 1.0f);
+
+			var volumeDistance = Mathf.Max(glass.sodaVolume - 20000, 0) / 20000;
+
+			var percentPerfect = (1 - volumeDistance) * (1 - compositionDistance);
+			GD.Print(volumeDistance, ", ", percentPerfect);
+
+			glass.Destroy();
+		};
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		var targetPosition = GetTargetPosition();
 		var displacement = targetPosition - GlobalPosition;
@@ -65,6 +90,8 @@ public partial class Npc : Node2D
 		if (CurrentState == State.ORDERING) {
 			SpeachBubble.PercentVisible += 1.0f * ((float)delta);
 		}
+
+		PlacementArea.IsEnabled = CurrentState == State.ORDERING;
 
 		
 	}

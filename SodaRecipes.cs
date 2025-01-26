@@ -4,8 +4,8 @@ using System;
 public partial class Soda : Node
 {
 	public struct Ingredient {
-		int part;
-		Type sodaType;
+		public int part;
+		public Type sodaType;
 
 		public Ingredient(int _part, Type _type) {
 			part = _part;
@@ -60,6 +60,22 @@ public partial class Soda : Node
 				new Ingredient(3, Type.GINGER), 
 				new Ingredient(1, Type.CLUB) };
 		}
+	}
+
+	static public float[] GetComposition(Cocktail cocktail) {
+		var sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
+
+		var totalParts = 0.0f;
+		foreach (var ingredient in GetRecipe(cocktail)) {
+			totalParts += ingredient.part;
+			sodaComposition[(int) ingredient.sodaType] += ingredient.part;
+		}
+
+		foreach (var ingredient in GetRecipe(cocktail)) {
+			sodaComposition[(int) ingredient.sodaType] /= totalParts;
+		}
+		
+		return sodaComposition;
 	}
 
 	static public String GetName(Cocktail cocktail) {

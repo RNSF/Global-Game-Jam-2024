@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://s4c0xi4t2o62"]
+[gd_scene load_steps=9 format=3 uid="uid://s4c0xi4t2o62"]
 
 [ext_resource type="Script" path="res://Npc.cs" id="1_k5ihh"]
 [ext_resource type="Texture2D" uid="uid://ddr1yifyaxyqp" path="res://temp_assets/cowboy.png" id="1_qfb3y"]
 [ext_resource type="PackedScene" uid="uid://dhbidavdfsggp" path="res://order_bubble.tscn" id="3_5od2i"]
+[ext_resource type="Script" path="res://PlacementZone.cs" id="4_2oxbe"]
+[ext_resource type="Texture2D" uid="uid://clc08t56jgu0o" path="res://assets/placement_ring.png" id="4_23q7x"]
+[ext_resource type="Script" path="res://OscillatingNode2D.cs" id="5_geks5"]
+[ext_resource type="Texture2D" uid="uid://c207f4atf0bvh" path="res://assets/arrow.png" id="6_igclo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6y634"]
+radius = 48.75
+height = 335.0
 
 [node name="Npc" type="Node2D"]
 script = ExtResource("1_k5ihh")
@@ -19,3 +27,28 @@ offset_top = -130.0
 offset_right = 4.0
 offset_bottom = -130.0
 Text = "[center]Alright pin head, your time is up."
+
+[node name="PlacementZone" type="Area2D" parent="."]
+position = Vector2(-2, 135)
+scale = Vector2(0.8, 0.8)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("4_2oxbe")
+
+[node name="RingSprite" type="Sprite2D" parent="PlacementZone"]
+texture = ExtResource("4_23q7x")
+
+[node name="ArrowCenter" type="Node2D" parent="PlacementZone"]
+position = Vector2(3, -147)
+script = ExtResource("5_geks5")
+amplitude = 20.0
+frequency = 9.425
+
+[node name="Arrow" type="Sprite2D" parent="PlacementZone/ArrowCenter"]
+position = Vector2(-3, -19.0001)
+texture = ExtResource("6_igclo")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementZone"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6y634")

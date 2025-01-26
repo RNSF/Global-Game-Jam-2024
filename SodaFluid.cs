@@ -13,6 +13,7 @@ public partial class SodaFluid : Node2D
 		public Rid body;
 		public Rid canvasItem;
 		public float[] sodaComposition;
+		public float radius;
 	}
 
 	const float MIN_PARTICLE_RADIUS = 6.0f;
@@ -71,7 +72,7 @@ public partial class SodaFluid : Node2D
 
 		float[] sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
 		sodaComposition[(int) sodaType] = 1.0f;
-		var particle = new Particle {body = body, canvasItem = canvasItem, sodaComposition = sodaComposition};
+		var particle = new Particle {body = body, canvasItem = canvasItem, sodaComposition = sodaComposition, radius = particleRadius};
 		bodyToParticle.Add(body, particle);
 	}
 }
