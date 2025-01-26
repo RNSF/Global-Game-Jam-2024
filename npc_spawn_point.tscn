@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqtrueykh3fou"]
+
+[ext_resource type="Script" path="res://NpcSpawnPoint.cs" id="1_v5evs"]
+
+[node name="NPCSpawnPoint" type="Marker2D" groups=["NpcSpawnPoints"]]
+script = ExtResource("1_v5evs")

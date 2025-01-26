@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=11 format=3 uid="uid://dqm15qcln6w26"]
 
+[ext_resource type="PackedScene" uid="uid://cqtrueykh3fou" path="res://npc_spawn_point.tscn" id="1_blhfc"]
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_l5e8w"]
 [ext_resource type="PackedScene" uid="uid://cc0n8wgdkc85y" path="res://mouse.tscn" id="2_gaf3q"]
 [ext_resource type="PackedScene" uid="uid://b1utibb208qk0" path="res://soda_fluid.tscn" id="3_3a48s"]
 [ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
+[ext_resource type="Script" path="res://Npcs.cs" id="7_hk5re"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1eixp"]
 size = Vector2(1967, 673)
@@ -18,6 +20,24 @@ size = Vector2(2003, 151.5)
 size = Vector2(1323, 247)
 
 [node name="GameScene" type="Node2D"]
+
+[node name="NPCSpawnPoint" parent="." instance=ExtResource("1_blhfc")]
+position = Vector2(587.5, -272)
+
+[node name="NPCSpawnPoint2" parent="." instance=ExtResource("1_blhfc")]
+position = Vector2(0.5, -275)
+
+[node name="NPCSpawnPoint3" parent="." instance=ExtResource("1_blhfc")]
+position = Vector2(-604, -281.5)
+
+[node name="NPCs" type="Node2D" parent="."]
+script = ExtResource("7_hk5re")
+
+[node name="StartPointLeft" type="Marker2D" parent="NPCs"]
+position = Vector2(-1251, -280)
+
+[node name="StartPointRight" type="Marker2D" parent="NPCs"]
+position = Vector2(1237, -271)
 
 [node name="Bar" type="StaticBody2D" parent="."]
 collision_layer = 4
@@ -63,10 +83,11 @@ shape = SubResource("RectangleShape2D_s8yfq")
 position = Vector2(362.5, 282.5)
 shape = SubResource("RectangleShape2D_h27j5")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Mouse" parent="." instance=ExtResource("2_gaf3q")]
 
 [node name="SodaFluid" parent="." instance=ExtResource("3_3a48s")]
 
 [node name="Glass" parent="." instance=ExtResource("4_oecaf")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-12, -89)

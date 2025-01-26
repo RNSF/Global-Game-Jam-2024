@@ -31,8 +31,6 @@ public partial class SodaFluid : Node2D
 			var particleTransform = PhysicsServer2D.BodyGetState(particle.body, PhysicsServer2D.BodyState.Transform).As<Transform2D>();
 			particleTransform.Origin = particleTransform.Origin - GlobalPosition;
 			RenderingServer.CanvasItemSetTransform(particle.canvasItem, particleTransform);
-
-			GD.Print(particleTransform.Origin);
 		}
 	}
 
