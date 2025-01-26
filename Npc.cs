@@ -35,6 +35,9 @@ public partial class Npc : Node2D
 			if (oldState != _currentState) {
 				SpeachBubble.PercentVisible = 0.0f;
 			}
+
+			if (CharacterSprite != null)
+				CharacterSprite.Modulate = Colors.White.Lerp(Colors.Black, CurrentState == State.ORDERING ? 0.0f : 0.3f);
 		}
 	}
 
@@ -46,12 +49,20 @@ public partial class Npc : Node2D
 		get => GetNode<OrderBubble>("OrderBubble");
 	}
 
+	private Sprite2D CharacterSprite {
+		get => GetNode<Sprite2D>("Sprite");
+	}
+
+	private PackedScene TextParticleScene;
+
+	float lifetime = 0.0f;
 
     public override void _Ready()
     {
+		TextParticleScene = GD.Load<PackedScene>("res://text_particle.tscn");
         PlacementArea.GlassServed += (glass) => {
 			if (glass.sodaVolume == 0.0) return;
-			
+
 			var compositionDistance = 0.0f;
 			var idealComposition = Soda.GetComposition(cocktail);
 			
@@ -64,9 +75,25 @@ public partial class Npc : Node2D
 			var volumeDistance = Mathf.Max(glass.sodaVolume - 18000, 0) / 18000;
 
 			var percentPerfect = (1 - volumeDistance) * (1 - compositionDistance);
-			GD.Print(percentPerfect);
+			GD.Print(percentPerfect, ", ", compositionDistance, ", ", volumeDistance);
 
 			glass.DestroyFluid();
+
+			var textParticle = TextParticleScene.Instantiate<TextParticle>();
+			GetTree().Root.AddChild(textParticle);
+			textParticle.GlobalPosition = GlobalPosition + Vector2.Up * 150f;
+			
+			if (percentPerfect > 0.9) {
+				textParticle.TextLabel.Text = "Perfect!";
+			} else if(percentPerfect > 0.8) {
+				textParticle.TextLabel.Text = "Very Nice.";
+			} else if(percentPerfect > 0.7) {
+				textParticle.TextLabel.Text = "Tasty!";
+			} else if(percentPerfect > 0.5) {
+				textParticle.TextLabel.Text = "It's Missing Something...";
+			} else {
+				textParticle.TextLabel.Text = "You call that a drink?";
+			}
 
 			CurrentState = State.WALK_OUT;
 		};
@@ -77,6 +104,14 @@ public partial class Npc : Node2D
 		var targetPosition = GetTargetPosition();
 		var displacement = targetPosition - GlobalPosition;
 		var dx = displacement.Normalized() * 200.0f * (float) delta;
+
+		lifetime += ((float)delta) * (CurrentState == State.ORDERING ? 2.0f : 4.0f);
+		float amplitude = CurrentState == State.ORDERING ? 3.0f : 8.0f;
+
+		float bob = Mathf.Abs(Mathf.Sin(lifetime) * amplitude) - amplitude / 2;
+		if (CurrentState == State.ORDERING) bob = Mathf.Sin(lifetime) * amplitude;
+
+		CharacterSprite.Position = Vector2.Up * bob;
 		
 
 		dx = dx.Normalized() * (float) Math.Clamp(dx.Length(), 0.0, displacement.Length());

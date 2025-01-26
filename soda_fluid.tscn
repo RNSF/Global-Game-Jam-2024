@@ -1,7 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1utibb208qk0"]
+[gd_scene load_steps=8 format=3 uid="uid://b1utibb208qk0"]
 
 [ext_resource type="Script" path="res://SodaFluid.cs" id="1_w7bq5"]
 [ext_resource type="Shader" path="res://soda_fluid.gdshader" id="2_1gsdi"]
+[ext_resource type="Texture2D" uid="uid://bxuvoypragumk" path="res://icon.svg" id="3_o4y6g"]
+
+[sub_resource type="Curve" id="Curve_vrwmo"]
+_data = [Vector2(0, 0.0354838), 0.0, 0.0, 0, 0, Vector2(0.124031, 0.622581), 0.0, 0.0, 0, 0, Vector2(0.864341, 0.654032), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_64rc5"]
+curve = SubResource("Curve_vrwmo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qxxi2"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 200, 0)
+direction = Vector3(-1, 0, 0)
+gravity = Vector3(0, -300, 0)
+scale_min = 3.0
+scale_max = 3.0
+alpha_curve = SubResource("CurveTexture_64rc5")
+turbulence_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ynn"]
 shader = ExtResource("2_1gsdi")
@@ -11,5 +30,22 @@ shader_parameter/line_thickness = 1.0
 [node name="SodaFluid" type="Node2D"]
 script = ExtResource("1_w7bq5")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
+position = Vector2(-13, -221)
+texture = ExtResource("3_o4y6g")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+amount = 20000
+process_material = SubResource("ParticleProcessMaterial_qxxi2")
+lifetime = 20.0
+
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_l2ynn")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+texture = ExtResource("3_o4y6g")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(44, 59)
+texture = ExtResource("3_o4y6g")
