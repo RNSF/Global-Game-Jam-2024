@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-[Tool]
+
 public partial class SodaSurface : SubViewportContainer
 {
 
@@ -35,10 +35,17 @@ public partial class SodaSurface : SubViewportContainer
 
     public override void _Process(double delta)
     {
-		//SubCamera.GlobalTransform = GetGlobalTransform().Inverse() * GetViewport().GetCamera2D().Transform.Inverse();
-		//SubCamera.GlobalPosition =  GetViewport().GetCamera2D().GlobalPosition - GetParent<Node2D>().GlobalPosition;
+		SubCamera.IgnoreRotation = false;
+		//SubCamera.Rotation += ((float) delta) * Input.GetActionStrength("ui_left");
 		
-        SubCamera.GlobalPosition = SubCamera.GlobalPosition + new Vector2( Input.GetAxis("ui_left", "ui_right"),  Input.GetAxis("ui_up", "ui_down")) * 100.0f * ((float)delta);
+		// SubCamera.GlobalTransform = GetGlobalTransform();
+		// SubCamera.GlobalRotation = GetGlobalTransform().Rotation;
+		SubCamera.GlobalPosition = Size / 2 + GetGlobalTransform().Origin;
+		GD.Print(GetGlobalTransform().Rotation);
+		GD.Print(SubCamera.GlobalPosition);
+		// SubCamera.GlobalPosition =  GetViewport().GetCamera2D().GlobalPosition - GetParent<Node2D>().GlobalPosition ;
+		
+        //SubCamera.GlobalPosition = SubCamera.GlobalPosition + new Vector2( Input.GetAxis("ui_left", "ui_right"),  Input.GetAxis("ui_up", "ui_down")) * 100.0f * ((float)delta);
     }
 
     public void UpdateSize(Vector2 position, Vector2 size) {
