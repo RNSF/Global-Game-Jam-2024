@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=31 format=3 uid="uid://dqm15qcln6w26"]
 
 [ext_resource type="PackedScene" uid="uid://cqtrueykh3fou" path="res://npc_spawn_point.tscn" id="1_blhfc"]
 [ext_resource type="Texture2D" uid="uid://bogdpkyw5qd8e" path="res://assets/BarBG.png" id="1_qaao2"]
@@ -8,10 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
 [ext_resource type="Texture2D" uid="uid://dwstq72mevl26" path="res://assets/BarWorkbench.png" id="5_nx0io"]
 [ext_resource type="PackedScene" uid="uid://2hm27v3ila3r" path="res://ginger_bottle.tscn" id="6_ocoeu"]
+[ext_resource type="Texture2D" uid="uid://bqk4u7nn4yx23" path="res://assets/mouse.png" id="6_yvug8"]
+[ext_resource type="Texture2D" uid="uid://drigsv2vgqdem" path="res://assets/mouse_button.png" id="7_5sc50"]
 [ext_resource type="PackedScene" uid="uid://dnu0kch8ygmho" path="res://cranberry_bottle.tscn" id="7_a4pkt"]
 [ext_resource type="Script" path="res://Npcs.cs" id="7_hk5re"]
 [ext_resource type="PackedScene" uid="uid://b38ra30ep5fhu" path="res://cola_bottle.tscn" id="8_8yhkq"]
 [ext_resource type="PackedScene" uid="uid://bk7sv80mulb6" path="res://menu.tscn" id="8_56oin"]
+[ext_resource type="FontFile" uid="uid://bcbrhj01os4y7" path="res://assets/Kalam/Kalam-Bold.ttf" id="8_px2od"]
+[ext_resource type="Texture2D" uid="uid://d3iwl6lj2gbaf" path="res://assets/space.png" id="9_dmf7t"]
 [ext_resource type="PackedScene" uid="uid://cp7p4mgp4bub4" path="res://club_bottle.tscn" id="9_p2v4p"]
 [ext_resource type="Texture2D" uid="uid://b2cgmu3wkiox" path="res://assets/BarCounter.png" id="10_u0f3d"]
 [ext_resource type="AudioStream" uid="uid://dhu3asslv5p0q" path="res://assets/sounds/Bottle_Table/BottleOnTable1.wav" id="11_ytqgq"]
@@ -85,6 +89,105 @@ texture = ExtResource("5_nx0io")
 position = Vector2(0, -74)
 texture = ExtResource("10_u0f3d")
 
+[node name="Controls" type="Node2D" parent="."]
+modulate = Color(0.292417, 0.277234, 0.277233, 1)
+position = Vector2(20, 35)
+
+[node name="Sprite2D" type="Sprite2D" parent="Controls"]
+position = Vector2(-242, 254)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_yvug8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Controls/Sprite2D"]
+show_behind_parent = true
+position = Vector2(-27.5, -42.5)
+texture = ExtResource("7_5sc50")
+
+[node name="Label3" type="Label" parent="Controls"]
+offset_left = -210.0
+offset_top = 228.0
+offset_right = -94.0
+offset_bottom = 293.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_px2od")
+theme_override_font_sizes/font_size = 40
+text = "Grab"
+
+[node name="Sprite2D2" type="Sprite2D" parent="Controls"]
+position = Vector2(-21.4, 256)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_yvug8")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Controls/Sprite2D2"]
+show_behind_parent = true
+position = Vector2(-27.4999, -40)
+scale = Vector2(1, 1)
+texture = ExtResource("7_5sc50")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Controls/Sprite2D2"]
+show_behind_parent = true
+position = Vector2(27.5001, -42.5)
+scale = Vector2(1, 1)
+texture = ExtResource("7_5sc50")
+flip_h = true
+
+[node name="Label4" type="Label" parent="Controls"]
+offset_left = 6.0
+offset_top = 224.0
+offset_right = 214.0
+offset_bottom = 289.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_px2od")
+theme_override_font_sizes/font_size = 40
+text = "Grab Firmly"
+
+[node name="Label2" type="Label" parent="Controls"]
+offset_left = -57.2
+offset_top = 324.0
+offset_right = 58.8
+offset_bottom = 389.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_px2od")
+theme_override_font_sizes/font_size = 40
+text = "Pour"
+
+[node name="Label5" type="Label" parent="Controls"]
+offset_left = 105.0
+offset_top = 315.0
+offset_right = 261.0
+offset_bottom = 380.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_px2od")
+theme_override_font_sizes/font_size = 30
+text = "Shake to"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="Controls"]
+offset_left = 42.0
+offset_top = 349.0
+offset_right = 271.0
+offset_bottom = 414.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_px2od")
+theme_override_font_sizes/font_size = 30
+text = "increase fizz."
+horizontal_alignment = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="Controls"]
+position = Vector2(-171.2, 352)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("9_dmf7t")
+
+[node name="Label" type="Label" parent="Controls/Sprite2D3"]
+offset_left = -54.0
+offset_top = -26.0
+offset_right = 62.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_px2od")
+theme_override_font_sizes/font_size = 40
+text = "SPACE"
+
 [node name="GingerBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("6_ocoeu")]
 position = Vector2(-504, 185)
 sodaFluid = NodePath("../SodaFluid")
@@ -119,22 +222,27 @@ sodaFluid = NodePath("../SodaFluid")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Table"]
 position = Vector2(-1187.5, -300)
 shape = SubResource("RectangleShape2D_d71ei")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Table"]
 position = Vector2(-131.5, -1119)
 shape = SubResource("RectangleShape2D_2b7cf")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Table"]
 position = Vector2(-0.5, 467)
 shape = SubResource("RectangleShape2D_s8yfq")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
 position = Vector2(352.5, 305.5)
 shape = SubResource("RectangleShape2D_h27j5")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Table"]
 position = Vector2(1129.5, -342.5)
 shape = SubResource("RectangleShape2D_trik3")
+metadata/_edit_lock_ = true
 
 [node name="TableCollision" type="AudioStreamPlayer" parent="Table"]
 stream = SubResource("AudioStreamRandomizer_miy0i")
@@ -143,6 +251,7 @@ stream = SubResource("AudioStreamRandomizer_miy0i")
 
 [node name="SodaFluid" parent="." instance=ExtResource("3_3a48s")]
 position = Vector2(0, -89)
+metadata/_edit_lock_ = true
 
 [node name="Glass4" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
 position = Vector2(815, 91)

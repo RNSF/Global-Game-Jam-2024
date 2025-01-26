@@ -27,6 +27,7 @@ public partial class Soda : Node
 		COLA,
 		MELLOW_GINGER,
 		MIGHTY_GINGER,
+		HOUSE_SPECIAL,
 
 	};
 
@@ -57,7 +58,11 @@ public partial class Soda : Node
 				new Ingredient(2, Type.CLUB) };
 			case Cocktail.MIGHTY_GINGER: return new Ingredient[] { 
 				new Ingredient(3, Type.GINGER), 
-				new Ingredient(1, Type.CLUB) };
+				new Ingredient(1, Type.COLA) };
+			case Cocktail.HOUSE_SPECIAL: return new Ingredient[] { 
+				new Ingredient(1, Type.GINGER), 
+				new Ingredient(1, Type.CRANBERRY),
+				new Ingredient(1, Type.COLA) };
 		}
 	}
 
@@ -93,6 +98,8 @@ public partial class Soda : Node
 				return "Mellow Ginger";
 			case Cocktail.MIGHTY_GINGER:
 				return "Mighty Ginger";
+			case Cocktail.HOUSE_SPECIAL:
+				return "House Special";
 		}
 	}
 
