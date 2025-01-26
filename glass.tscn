@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cber3u6bpcuqp"]
+[gd_scene load_steps=4 format=3 uid="uid://cber3u6bpcuqp"]
 
 [ext_resource type="Script" path="res://Glass.cs" id="1_svax4"]
 [ext_resource type="Texture2D" uid="uid://cs4xsgwr3s67b" path="res://assets/BarGlass.png" id="2_rud73"]
+[ext_resource type="PackedScene" uid="uid://jal6qfeojqm3" path="res://soda_surface.tscn" id="3_ebkfu"]
 
 [node name="Glass" type="RigidBody2D"]
 collision_layer = 24
@@ -29,3 +30,9 @@ collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InnerArea"]
 polygon = PackedVector2Array(-74, -83, 80, -83, 57, 78, -51, 77)
+
+[node name="SodaSurface" parent="." instance=ExtResource("3_ebkfu")]
+offset_left = -249.0
+offset_top = -243.0
+offset_right = 263.0
+offset_bottom = 269.0

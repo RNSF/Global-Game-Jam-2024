@@ -21,6 +21,10 @@ public partial class Glass : RigidBody2D
 	private CollisionPolygon2D InnerAreaShape {
 		get => GetNode<CollisionPolygon2D>("InnerArea/CollisionPolygon2D");
 	}
+
+	private SodaSurface SodaSurfaceNode {
+		get => GetNode<SodaSurface>("SodaSurface");
+	}
 	
 	private bool isOnBar = false;
 	private bool isBehindBar = false;
@@ -93,7 +97,7 @@ public partial class Glass : RigidBody2D
 					particle.sodaComposition[i] = sodaComposition[i];
 				}
 
-				
+				RenderingServer.CanvasItemSetParent(particle.canvasItem, SodaSurfaceNode.CanvasGroupNode.GetCanvasItem());
 				RenderingServer.CanvasItemSetModulate(particle.canvasItem, color);
 			}
 		}

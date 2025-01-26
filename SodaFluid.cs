@@ -21,7 +21,7 @@ public partial class SodaFluid : Node2D
 	public Dictionary<Rid, Particle> bodyToParticle = new Dictionary<Rid, Particle>();
 	
 	CanvasGroup SodaCanvasGroup {
-		get => GetNode<CanvasGroup>("CanvasGroup");
+		get => GetNode<CanvasGroup>("SodaSurface/SubViewport/CanvasGroup");
 	}
 
     public override void _Ready() {
@@ -39,6 +39,7 @@ public partial class SodaFluid : Node2D
 			var particleTransform = PhysicsServer2D.BodyGetState(particle.body, PhysicsServer2D.BodyState.Transform).As<Transform2D>();
 			particleTransform.Origin = particleTransform.Origin - GlobalPosition;
 			RenderingServer.CanvasItemSetTransform(particle.canvasItem, particleTransform);
+			RenderingServer.CanvasItemSetParent(particle.canvasItem, SodaCanvasGroup.GetCanvasItem());
 		}
 	}
 

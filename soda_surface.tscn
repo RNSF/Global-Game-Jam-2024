@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://jal6qfeojqm3"]
+
+[ext_resource type="Shader" path="res://soda_fluid.gdshader" id="1_dj5h4"]
+[ext_resource type="Script" path="res://SodaSurface.cs" id="1_rn2qe"]
+[ext_resource type="Texture2D" uid="uid://bxuvoypragumk" path="res://icon.svg" id="2_hsmir"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ynn"]
+shader = ExtResource("1_dj5h4")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 3.0
+
+[sub_resource type="Curve" id="Curve_vrwmo"]
+_data = [Vector2(0, 0.0354838), 0.0, 0.0, 0, 0, Vector2(0.124031, 0.622581), 0.0, 0.0, 0, 0, Vector2(0.864341, 0.654032), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_64rc5"]
+curve = SubResource("Curve_vrwmo")
+
+[sub_resource type="Curve" id="Curve_3fxl0"]
+_data = [Vector2(0, 0.00403225), 0.0, 0.0, 0, 0, Vector2(0.151163, 1), 0.0, 0.0, 0, 0, Vector2(0.794574, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_6egxx"]
+curve = SubResource("Curve_3fxl0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qxxi2"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(256, 256, 0)
+emission_shape = 3
+emission_box_extents = Vector3(256, 256, 0)
+direction = Vector3(-1, 0, 0)
+gravity = Vector3(0, -600, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_6egxx")
+color = Color(1, 1, 1, 0.447059)
+alpha_curve = SubResource("CurveTexture_64rc5")
+turbulence_enabled = true
+
+[node name="SodaSurface" type="SubViewportContainer"]
+clip_children = 2
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_rn2qe")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="CanvasGroup" type="CanvasGroup" parent="SubViewport"]
+material = SubResource("ShaderMaterial_l2ynn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/CanvasGroup"]
+texture = ExtResource("2_hsmir")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewport/CanvasGroup"]
+position = Vector2(44, 59)
+texture = ExtResource("2_hsmir")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]
+
+[node name="BubbleParticles" type="GPUParticles2D" parent="."]
+position = Vector2(151, 225)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_qxxi2")
+lifetime = 20.0
