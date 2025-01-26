@@ -39,8 +39,8 @@ public partial class SodaSurface : SubViewportContainer
 		//SubCamera.Rotation += ((float) delta) * Input.GetActionStrength("ui_left");
 		
 		// SubCamera.GlobalTransform = GetGlobalTransform();
-		// SubCamera.GlobalRotation = GetGlobalTransform().Rotation;
-		SubCamera.GlobalPosition = Size / 2 + GetGlobalTransform().Origin;
+		SubCamera.GlobalRotation = GetGlobalTransform().Rotation;
+		SubCamera.GlobalPosition = (Size / 2).Rotated(GetGlobalTransform().Rotation) + GetGlobalTransform().Origin;
 		GD.Print(GetGlobalTransform().Rotation);
 		GD.Print(SubCamera.GlobalPosition);
 		// SubCamera.GlobalPosition =  GetViewport().GetCamera2D().GlobalPosition - GetParent<Node2D>().GlobalPosition ;
