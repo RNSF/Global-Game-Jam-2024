@@ -156,6 +156,7 @@ public partial class Npc : Node2D
 		bool atTarget = GlobalPosition.IsEqualApprox(targetPosition);
 		if (atTarget && CurrentState == State.WALK_IN) {
 			CurrentState++;
+			OrderSound.Play();
 		}
 
 		if (atTarget && CurrentState == State.WALK_OUT) {

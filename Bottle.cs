@@ -35,9 +35,7 @@ public partial class Bottle : RigidBody2D
 		get => GetNode<AudioStreamPlayer>("BottleCollision");
 	}
 
-	public AudioStreamPlayer TableCollisionSound {
-		get => GetNode<AudioStreamPlayer>("TableCollision");
-	}
+	
 
 	
 	// Called when the node enters the scene tree for the first time.
@@ -48,7 +46,6 @@ public partial class Bottle : RigidBody2D
 		this.MouseEntered += () => isHovered = true;
 		this.MouseExited += () => isHovered = false;
 		this.BodyEntered += (body) => {
-			
 			if (body is PhysicsBody2D physicsBody) {
 				var loudness = Mathf.Clamp(Mathf.Remap(LinearVelocity.Length(), 0.0f, 30.0f, 0.0f, 1.0f), 0.0f, 1.0f);
 				GD.Print(loudness);
@@ -56,14 +53,13 @@ public partial class Bottle : RigidBody2D
 					
 					BottleCollisionSound.VolumeDb = Mathf.LinearToDb(loudness);
 					BottleCollisionSound.Play();
-				} else {
-					TableCollisionSound.VolumeDb = Mathf.LinearToDb(loudness);
-					TableCollisionSound.Play();
 				}
 				
 			} 
 		};
 	}
+
+
 
 
 

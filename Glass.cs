@@ -40,10 +40,6 @@ public partial class Glass : RigidBody2D
 		get => GetNode<AudioStreamPlayer>("GlassCollision");
 	}
 
-	public AudioStreamPlayer TableCollisionSound {
-		get => GetNode<AudioStreamPlayer>("TableCollision");
-	}
-
     public override void _Ready()
     {
 		Debug.Assert(sodaFluid != null);
@@ -59,9 +55,6 @@ public partial class Glass : RigidBody2D
 					
 					GlassCollisionSound.VolumeDb = Mathf.LinearToDb(loudness);
 					GlassCollisionSound.Play();
-				} else {
-					TableCollisionSound.VolumeDb = Mathf.LinearToDb(loudness);
-					TableCollisionSound.Play();
 				}
 				
 			} 

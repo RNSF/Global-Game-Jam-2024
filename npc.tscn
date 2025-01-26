@@ -69,7 +69,7 @@ amplitude = 20.0
 frequency = 9.425
 
 [node name="Arrow" type="Sprite2D" parent="PlacementZone/Sprites/ArrowCenter"]
-position = Vector2(-3, -0.175722)
+position = Vector2(-3, 5.37489)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_igclo")
 metadata/_edit_lock_ = true
