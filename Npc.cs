@@ -65,6 +65,8 @@ public partial class Npc : Node2D
 			GD.Print(volumeDistance, ", ", percentPerfect);
 
 			glass.Destroy();
+
+			CurrentState = State.WALK_OUT;
 		};
     }
 
@@ -84,6 +86,7 @@ public partial class Npc : Node2D
 		}
 
 		if (atTarget && CurrentState == State.WALK_OUT) {
+			GD.Print("Freed Customer");
 			QueueFree();
 		}
 

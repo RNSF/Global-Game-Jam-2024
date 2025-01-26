@@ -75,4 +75,11 @@ public partial class SodaFluid : Node2D
 		var particle = new Particle {body = body, canvasItem = canvasItem, sodaComposition = sodaComposition, radius = particleRadius};
 		bodyToParticle.Add(body, particle);
 	}
+
+	public void DestroyParticle(Rid bodyRid) {
+		Particle particle = bodyToParticle[bodyRid];
+		bodyToParticle.Remove(bodyRid);
+		RenderingServer.FreeRid(particle.canvasItem);
+		PhysicsServer2D.FreeRid(particle.body);
+	}
 }

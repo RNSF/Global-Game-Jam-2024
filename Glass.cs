@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -29,6 +30,7 @@ public partial class Glass : RigidBody2D
 	public float sodaVolume;
 
 
+
     public override void _Ready()
     {
 		Debug.Assert(sodaFluid != null);
@@ -53,14 +55,7 @@ public partial class Glass : RigidBody2D
 		}
 
 		// detect fluid
-		var state = GetWorld2D().DirectSpaceState;
-		var query = new PhysicsShapeQueryParameters2D();
-		query.CollideWithAreas = false;
-		query.CollideWithBodies = true;
-		query.CollisionMask = CollisionLayers.FLUID;
-		query.Shape = innerShape;
-		query.Transform = GlobalTransform;
-		var results = state.IntersectShape(query, 300);
+		var results = SodaCheck();
 
 		sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
 		sodaVolume = 0.0f;
@@ -118,7 +113,26 @@ public partial class Glass : RigidBody2D
 	}
 
 	public void Destroy() {
+		var results = SodaCheck();
 
+		GD.Print(results.Count);
+		foreach (var result in results) {
+			Rid rid = result["rid"].As<Rid>();
+			sodaFluid.DestroyParticle(rid);
+		}
+
+		QueueFree();
+	}
+
+	public Godot.Collections.Array<Godot.Collections.Dictionary> SodaCheck() {
+		var state = GetWorld2D().DirectSpaceState;
+		var query = new PhysicsShapeQueryParameters2D();
+		query.CollideWithAreas = false;
+		query.CollideWithBodies = true;
+		query.CollisionMask = CollisionLayers.FLUID;
+		query.Shape = innerShape;
+		query.Transform = GlobalTransform;
+		return state.IntersectShape(query, 300);
 	}
 	
 }
