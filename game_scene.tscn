@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=12 format=3 uid="uid://dqm15qcln6w26"]
 
 [ext_resource type="PackedScene" uid="uid://cqtrueykh3fou" path="res://npc_spawn_point.tscn" id="1_blhfc"]
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_l5e8w"]
 [ext_resource type="PackedScene" uid="uid://cc0n8wgdkc85y" path="res://mouse.tscn" id="2_gaf3q"]
 [ext_resource type="PackedScene" uid="uid://b1utibb208qk0" path="res://soda_fluid.tscn" id="3_3a48s"]
+[ext_resource type="Script" path="res://Table.cs" id="4_ktyc2"]
 [ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
 [ext_resource type="Script" path="res://Npcs.cs" id="7_hk5re"]
 
@@ -53,7 +54,7 @@ sodaFluid = NodePath("../SodaFluid")
 sodaType = 1
 
 [node name="Bottle5" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
-position = Vector2(-367, 164)
+position = Vector2(-372, 159)
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="Bottle2" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
@@ -71,9 +72,17 @@ position = Vector2(-806, 166)
 sodaFluid = NodePath("../SodaFluid")
 sodaType = 4
 
-[node name="Table" type="StaticBody2D" parent="."]
+[node name="Table" type="RigidBody2D" parent="." node_paths=PackedStringArray("sodaFluid")]
 collision_layer = 17
 collision_mask = 17
+gravity_scale = 0.0
+can_sleep = false
+freeze = true
+freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 32
+script = ExtResource("4_ktyc2")
+sodaFluid = NodePath("../SodaFluid")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Table"]
 position = Vector2(-938.438, 280)
@@ -93,6 +102,24 @@ shape = SubResource("RectangleShape2D_h27j5")
 
 [node name="Glass" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
 position = Vector2(-5, 37)
+contact_monitor = true
+max_contacts_reported = 6
+sodaFluid = NodePath("../SodaFluid")
+
+[node name="Glass2" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+position = Vector2(193, 33)
+contact_monitor = true
+max_contacts_reported = 6
+sodaFluid = NodePath("../SodaFluid")
+
+[node name="Glass3" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+position = Vector2(352, 33)
+contact_monitor = true
+max_contacts_reported = 6
+sodaFluid = NodePath("../SodaFluid")
+
+[node name="Glass4" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+position = Vector2(511, 26)
 contact_monitor = true
 max_contacts_reported = 6
 sodaFluid = NodePath("../SodaFluid")

@@ -115,7 +115,6 @@ public partial class Glass : RigidBody2D
 	public void Destroy() {
 		var results = SodaCheck();
 
-		GD.Print(results.Count);
 		foreach (var result in results) {
 			Rid rid = result["rid"].As<Rid>();
 			sodaFluid.DestroyParticle(rid);

@@ -31,7 +31,7 @@ public partial class SodaFluid : Node2D
     public override void _PhysicsProcess(double delta) {
 
 		if (Input.IsActionPressed("debug_1")) {
-			CreateParticle(GetGlobalMousePosition(), Soda.Type.CRANBERRY);
+			CreateParticle(GetGlobalMousePosition(), Vector2.Zero, Soda.Type.CRANBERRY);
 		}
 
 		foreach(var particle in bodyToParticle.Values) {
@@ -41,7 +41,7 @@ public partial class SodaFluid : Node2D
 		}
 	}
 
-	public void CreateParticle(Vector2 particlePosition, Soda.Type sodaType) {
+	public void CreateParticle(Vector2 particlePosition, Vector2 particleVelocity, Soda.Type sodaType) {
 		// based on https://github.com/Chevifier/Fluid-Simulation-in-Godot/blob/main/FluidSim2D/WaterGenPhysicsServer.gd
 
 		if (!IsNodeReady()) return;
@@ -63,6 +63,7 @@ public partial class SodaFluid : Node2D
 		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.Mass, 0.05);
 		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.GravityScale, 1.0);
 		PhysicsServer2D.BodySetState(body, PhysicsServer2D.BodyState.Transform, particleTransform);
+		PhysicsServer2D.BodySetState(body, PhysicsServer2D.BodyState.LinearVelocity, particleVelocity);
 
 		var canvasItem = RenderingServer.CanvasItemCreate();
 		RenderingServer.CanvasItemSetParent(canvasItem, SodaCanvasGroup.GetCanvasItem());
