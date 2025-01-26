@@ -7,5 +7,8 @@
 script = ExtResource("1_w7bq5")
 
 [node name="SodaSurface" parent="." instance=ExtResource("2_g6daw")]
-offset_right = 1920.0
-offset_bottom = 1080.0
+custom_minimum_size = Vector2(1920, 1080)
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0

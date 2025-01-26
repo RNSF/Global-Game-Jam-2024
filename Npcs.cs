@@ -20,6 +20,11 @@ public partial class Npcs : Node2D
 	}
 
 
+	float spawnTimer = 0.0f;
+	const float MIN_SPAWN_TIME = 15.0f;
+	const float MAX_SPAWN_TIME = 30.0f;
+
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -35,6 +40,15 @@ public partial class Npcs : Node2D
     public override void _Process(double delta)
     {
         if (Input.IsActionJustPressed("debug_2")) {
+			SpawnNpc();
+		}
+
+		var filledSpawnPoints = spawnPoints.Where<NpcSpawnPoint>((a) => a.isFilled);
+		if (filledSpawnPoints.Count() == 0) spawnTimer = 0.0f;
+		spawnTimer -= ((float)delta);
+		if (spawnTimer < 0.0f) {
+			Random rng = new Random();
+			spawnTimer += Mathf.Lerp(MIN_SPAWN_TIME, MAX_SPAWN_TIME, rng.NextSingle());
 			SpawnNpc();
 		}
     }
@@ -66,7 +80,7 @@ public partial class Npcs : Node2D
 
 		GD.Print("Spawning NPC!");
 
-		npc.TreeExited += () => {
+		npc.OrderFullfilled += () => {
 			if (npc.spawnPoint is NpcSpawnPoint npcSpawnPoint) {
 				npcSpawnPoint.isFilled = false;
 			}

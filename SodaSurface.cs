@@ -57,7 +57,8 @@ public partial class SodaSurface : SubViewportContainer
 		SubViewportNode.Size = new Vector2I(((int)size.X), ((int)size.Y));
 		if (BubbleParticles.ProcessMaterial is ParticleProcessMaterial mat) {
 			mat.EmissionBoxExtents = new Vector3(size.X / 2, Size.Y / 2, 0);
-			mat.EmissionShapeOffset = new Vector3(size.X / 2, Size.Y / 2, 0);
+			//mat.EmissionShapeOffset = new Vector3(size.X / 2, Size.Y / 2, 0);
+			BubbleParticles.Position = Vector2.Zero;
 			BubbleParticles.Amount = (int) (Size.X * Size.Y * 0.1f);
 		};
 

@@ -82,7 +82,7 @@ public partial class Mouse : Node2D
 
 			SetBodyMode(Body, GrabLevel);
 
-			Global.isGlassHeld = Body is Glass;
+			
 		} 	
 	}
 
@@ -118,4 +118,9 @@ public partial class Mouse : Node2D
 			rigidBody.LockRotation = gravLevel == Grab.STRONG;
 		}
 	}
+
+    public override void _PhysicsProcess(double delta)
+    {
+        Global.isGlassHeld = Body is Glass && ((Glass) Body).sodaVolume > 2500;
+    }
 }

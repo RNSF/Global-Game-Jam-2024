@@ -57,6 +57,10 @@ public partial class Npc : Node2D
 
 	float lifetime = 0.0f;
 
+	[Signal]
+	public delegate void OrderFullfilledEventHandler();
+	
+
     public override void _Ready()
     {
 		TextParticleScene = GD.Load<PackedScene>("res://text_particle.tscn");
@@ -100,11 +104,12 @@ public partial class Npc : Node2D
 			} else if(percentPerfect > 0.7) {
 				textParticle.TextLabel.Text = "Tasty!";
 			} else if(percentPerfect > 0.5) {
-				textParticle.TextLabel.Text = "It's Missing Something...";
+				textParticle.TextLabel.Text = "It's not quite there.";
 			} else {
 				textParticle.TextLabel.Text = "You call that a drink?";
 			}
 
+			EmitSignal(SignalName.OrderFullfilled);
 			CurrentState = State.WALK_OUT;
 		};
     }
@@ -140,6 +145,7 @@ public partial class Npc : Node2D
 		if (CurrentState == State.ORDERING) {
 			SpeachBubble.PercentVisible += 1.0f * ((float)delta);
 		}
+		
 
 		PlacementArea.IsEnabled = CurrentState == State.ORDERING;
 

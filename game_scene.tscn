@@ -124,7 +124,7 @@ shape = SubResource("RectangleShape2D_trik3")
 [node name="Mouse" parent="." instance=ExtResource("2_gaf3q")]
 
 [node name="SodaFluid" parent="." instance=ExtResource("3_3a48s")]
-position = Vector2(-960, -628)
+position = Vector2(0, -89)
 
 [node name="Glass4" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
 position = Vector2(815, 91)
