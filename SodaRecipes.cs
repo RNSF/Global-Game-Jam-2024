@@ -31,7 +31,14 @@ public partial class Soda : Node
 
 	};
 
-	public Ingredient[] GetRecipe(Cocktail cocktail) {
+	public enum Fizz {
+		FLAT,
+		LIGHT,
+		STANDARD,
+		EXTRA,
+	}
+
+	static public Ingredient[] GetRecipe(Cocktail cocktail) {
 
 		switch(cocktail) {
 			default:
@@ -55,7 +62,7 @@ public partial class Soda : Node
 		}
 	}
 
-	public String GetName(Cocktail cocktail) {
+	static public String GetName(Cocktail cocktail) {
 
 		switch(cocktail) {
 			default:
@@ -71,6 +78,17 @@ public partial class Soda : Node
 				return "Mellow Ginger";
 			case Cocktail.MIGHTY_GINGER:
 				return "Mighty Ginger";
+		}
+	}
+
+	static public String GetFizzName(Fizz fizz) {
+
+		switch(fizz) {
+			default:
+			case Fizz.FLAT: return "No Fizz";
+			case Fizz.LIGHT: return "Lightly Fizzed";
+			case Fizz.STANDARD: return "Standard Fizz";
+			case Fizz.EXTRA: return "Extra Fizz";
 		}
 	}
 }

@@ -56,6 +56,14 @@ public partial class Npcs : Node2D
 		AddChild(npc);
 		npc.CurrentState = Npc.State.WALK_IN;
 
+		var possibleFizzValues = Enum.GetValues(typeof(Soda.Fizz));
+		Soda.Fizz fizz = (Soda.Fizz)possibleFizzValues.GetValue(rng.Next(possibleFizzValues.Length));
+
+		var possibleCocktails = Enum.GetValues(typeof(Soda.Cocktail));
+		Soda.Cocktail cocktail = (Soda.Cocktail)possibleCocktails.GetValue(rng.Next(possibleCocktails.Length));
+
+		npc.SetOrder(cocktail, fizz);
+
 		GD.Print("Spawning NPC!");
 
 		npc.TreeExited += () => {

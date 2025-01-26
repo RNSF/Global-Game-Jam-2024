@@ -15,7 +15,9 @@ public partial class Npc : Node2D
 	public Node2D spawnPoint;
 	public Node2D endPoint;
 	private State _currentState = State.WALK_IN;
-	public Soda.Cocktail cocktail;
+	private Soda.Cocktail cocktail;
+	private Soda.Fizz fizzLevel;
+
 	public State CurrentState {
 		get => _currentState;
 		set {
@@ -74,5 +76,11 @@ public partial class Npc : Node2D
 			case State.WALK_OUT: 	return endPoint.Position;
 			default:				return endPoint.Position;
 		}
+	}
+
+	public void SetOrder(Soda.Cocktail newCocktail, Soda.Fizz newFizzLevel) {
+		cocktail = newCocktail;
+		fizzLevel = newFizzLevel;
+		SpeachBubble.Text = $"One {Soda.GetName(cocktail)},\n{Soda.GetFizzName(fizzLevel)}";
 	}
 }
