@@ -39,7 +39,7 @@ public partial class Npcs : Node2D
 
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("debug_2")) {
+        if (false && Input.IsActionJustPressed("debug_2")) {
 			SpawnNpc();
 		}
 

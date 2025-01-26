@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnu0kch8ygmho"]
+[gd_scene load_steps=5 format=3 uid="uid://dnu0kch8ygmho"]
 
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_irims"]
 [ext_resource type="Texture2D" uid="uid://dj8u1ocj25ux5" path="res://assets/Bottle02.png" id="2_0w4yp"]
+[ext_resource type="Shader" path="res://bottle.gdshader" id="2_g126c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3cam"]
+resource_local_to_scene = true
+shader = ExtResource("2_g126c")
+shader_parameter/color = Color(1, 0.403922, 0, 1)
+shader_parameter/width = 8.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = true
 
 [node name="CranberryBottle" instance=ExtResource("1_irims")]
 sodaType = 1
 
 [node name="Bottle" parent="." index="0"]
+material = SubResource("ShaderMaterial_v3cam")
 position = Vector2(0, 0)
 scale = Vector2(1, 1)
 texture = ExtResource("2_0w4yp")

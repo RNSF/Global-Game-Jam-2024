@@ -40,10 +40,10 @@ public partial class MenuIngredient : HBoxContainer
 		get => 0;
 		set {
 			switch(value) {
-				case Soda.Type.CLUB:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
-				case Soda.Type.CRANBERRY:	BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
-				case Soda.Type.GINGER:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
-				case Soda.Type.COLA:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
+				case Soda.Type.CLUB:		BottleIcon.Texture = GD.Load<Texture2D>("res://assets/Bottle04.png"); break;
+				case Soda.Type.CRANBERRY:	BottleIcon.Texture = GD.Load<Texture2D>("res://assets/Bottle02.png"); break;
+				case Soda.Type.GINGER:		BottleIcon.Texture = GD.Load<Texture2D>("res://assets/Bottle01.png"); break;
+				case Soda.Type.COLA:		BottleIcon.Texture = GD.Load<Texture2D>("res://assets/Bottle03.png"); break;
 			}
 		}
 	}

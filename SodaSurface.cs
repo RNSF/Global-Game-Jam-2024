@@ -47,6 +47,7 @@ public partial class SodaSurface : SubViewportContainer
 		BubbleParticles.AmountRatio = Mathf.Pow(0.1f, Mathf.Lerp(3.0f, 0.0f, fizziness)) ;
 		if (CanvasGroupNode.Material is ShaderMaterial shaderMaterial) {
 			shaderMaterial.SetShaderParameter("line_thickness", Mathf.Lerp(2.0f, 4.0f, fizziness));
+			shaderMaterial.SetShaderParameter("line_color", Colors.White.Blend(Soda.GetFizzColor(fizziness)));
 		}
 		// SubCamera.GlobalPosition =  GetViewport().GetCamera2D().GlobalPosition - GetParent<Node2D>().GlobalPosition ;
 		

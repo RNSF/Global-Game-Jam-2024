@@ -32,7 +32,7 @@ public partial class SodaFluid : Node2D
 
     public override void _PhysicsProcess(double delta) {
 
-		if (Input.IsActionPressed("debug_1")) {
+		if (false && Input.IsActionPressed("debug_1")) {
 			CreateParticle(GetGlobalMousePosition(), Vector2.Zero, 0.0f, Soda.Type.CRANBERRY);
 		}
 

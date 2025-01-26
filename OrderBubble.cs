@@ -32,8 +32,9 @@ public partial class OrderBubble : Control
 
 	[Export(PropertyHint.Range, "0.0, 1.0, 0.01")]
 	public float PercentVisible {
-		get => BubbleLabel.VisibleRatio;
+		get => IsNodeReady() ? BubbleLabel.VisibleRatio : 0.0f;
 		set {
+			if (!IsNodeReady()) return;
 			BubbleLabel.VisibleRatio = value;
 			UpdateSize();
 		}
@@ -41,9 +42,10 @@ public partial class OrderBubble : Control
 
 	[Export(PropertyHint.MultilineText)]
 	public String Text {
-		get => BubbleLabel.Text;
+		get => IsNodeReady() ? BubbleLabel.Text : "";
 
 		set {
+			if (!IsNodeReady()) return;
 			BubbleLabel.Text = value;
 			UpdateSize();
 		}	
@@ -51,6 +53,7 @@ public partial class OrderBubble : Control
 
 
 	public void UpdateSize() {
+		if (!IsNodeReady()) return;	
 		Font font = BubbleLabel.GetThemeFont("normal_font");
 		int fontSize = BubbleLabel.GetThemeFontSize("normal_font_size");
 		String rawText = StripBBCode(BubbleLabel.Text);

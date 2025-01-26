@@ -103,7 +103,7 @@ public partial class Soda : Node
 			case Fizz.FLAT: return "No Fizz";
 			case Fizz.LIGHT: return "Lightly Fizzed";
 			case Fizz.STANDARD: return "Standard Fizz";
-			case Fizz.EXTRA: return "Extra Fizz";
+			case Fizz.EXTRA: return "Maximally Fizzed";
 		}
 	}
 
@@ -114,6 +114,22 @@ public partial class Soda : Node
 			case Type.CRANBERRY: 	return new Color("#b01e3bff");
 			case Type.GINGER: 		return new Color("#abb04aff");
 			case Type.COLA: 		return new Color("#471409ff");
+		}
+	}
+	
+	static public Color GetFizzColor(float fizziness) {
+		Color col = new Color(1.0f, 1.0f, 0.0f, 1.0f).Lerp(new Color(1.0f, 0.0f, 0.0f, 1.0f), fizziness);
+		col.A = Mathf.Clamp(Mathf.Lerp(0.0f, 1.0f, fizziness * 4.0f), 0.0f, 1.0f);
+		return col;
+	}
+
+	static public float GetFizzinessOfLevel(Fizz fizzLevel) {
+		switch (fizzLevel) {
+			default:
+			case Soda.Fizz.FLAT: 		return 0.0f;
+			case Soda.Fizz.LIGHT:		return 0.3f;
+			case Soda.Fizz.STANDARD:	return 0.6f;
+			case Soda.Fizz.EXTRA:		return 0.9f;
 		}
 	}
 }

@@ -11,6 +11,13 @@ public partial class Npc : Node2D
 		ORDERING,
 		WALK_OUT
 	}
+
+	public enum Character {
+		COWBOY,
+		BOWLER,
+		LADY,
+		OLD_MAN,
+	}
 	
 	public Node2D spawnPoint;
 	public Node2D endPoint;
@@ -49,8 +56,8 @@ public partial class Npc : Node2D
 		get => GetNode<OrderBubble>("OrderBubble");
 	}
 
-	private Sprite2D CharacterSprite {
-		get => GetNode<Sprite2D>("Sprite");
+	private Node2D CharacterSprite {
+		get => GetNode<Node2D>("Sprite");
 	}
 
 	private PackedScene TextParticleScene;
@@ -72,8 +79,33 @@ public partial class Npc : Node2D
 		get => GetNode<AudioStreamPlayer>("Anger");
 	}
 
+	private Character character;
+
     public override void _Ready()
     {
+		Array values = Enum.GetValues(typeof(Character));
+		Random random = new Random();
+		Character character = (Character)values.GetValue(random.Next(values.Length));
+
+		for (int i = 0; i < CharacterSprite.GetChildCount(); i++) {
+
+			if (CharacterSprite.GetChild(i) is Node2D node2D) {
+				node2D.Visible = i == ((int)character);
+			}
+		}
+
+		if (character == Character.BOWLER || character == Character.OLD_MAN) {
+			OrderSound.PitchScale = 1.1f;
+			AngerSound.PitchScale = 1.1f;
+		}
+
+		if (character == Character.LADY) {
+			OrderSound.PitchScale = 1.5f;
+			AngerSound.PitchScale = 1.5f;
+		}
+
+		
+		
 		TextParticleScene = GD.Load<PackedScene>("res://text_particle.tscn");
         PlacementArea.GlassServed += (glass) => {
 			if (glass.sodaVolume == 0.0) return;
@@ -85,14 +117,8 @@ public partial class Npc : Node2D
 				compositionDistance += Mathf.Abs(idealComposition[i] - glass.sodaComposition[i]);
 			}
 
-			float idealFizziness = 0.0f;
-			switch (fizzLevel) {
-				case Soda.Fizz.FLAT: 		idealFizziness = 0.0f; break;
-				case Soda.Fizz.LIGHT:		idealFizziness = 0.3f; break;
-				case Soda.Fizz.STANDARD:	idealFizziness = 0.6f; break;
-				case Soda.Fizz.EXTRA:		idealFizziness = 0.9f; break;
-			}
-
+			float idealFizziness = Soda.GetFizzinessOfLevel(fizzLevel);
+			
 			float fizzDistance = Mathf.Clamp(Mathf.Remap(Mathf.Abs(idealFizziness - glass.fizzLevel), 0.3f, 0.6f, 0.0f, 1.0f), 0.0f, 1.0f);
 
 			compositionDistance = Mathf.Clamp(compositionDistance, 0.0f, 1.0f);
@@ -108,16 +134,42 @@ public partial class Npc : Node2D
 			GetTree().Root.AddChild(textParticle);
 			textParticle.GlobalPosition = GlobalPosition + Vector2.Up * 150f;
 			
+			textParticle.TextLabel.Text = "[center]";
+			
 			if (percentPerfect > 0.9) {
-				textParticle.TextLabel.Text = "Perfect!";
+				textParticle.TextLabel.Text += new Godot.Collections.Array<String>{
+					"Perfect!",
+					"Marveleous!",
+					"10/10",
+				}.PickRandom();;
 			} else if(percentPerfect > 0.8) {
-				textParticle.TextLabel.Text = "Very Nice.";
+				textParticle.TextLabel.Text += new Godot.Collections.Array<String>{
+					"Very Nice!",
+					"Superb!",
+					"Wonderful.",
+				}.PickRandom();
 			} else if(percentPerfect > 0.7) {
-				textParticle.TextLabel.Text = "Tasty!";
+				textParticle.TextLabel.Text += new Godot.Collections.Array<String>{
+					"Tasty!",
+					"Thank you.",
+					"Pretty Good!",
+				}.PickRandom();
 			} else if(percentPerfect > 0.5) {
-				textParticle.TextLabel.Text = "It's not quite there.";
+				textParticle.TextLabel.Text += new Godot.Collections.Array<String>{
+					"It's not quite there.",
+					"Meh. This is alright.",
+					"Could be better.",
+				}.PickRandom();
 			} else {
-				textParticle.TextLabel.Text = "You call that a drink?";
+				textParticle.TextLabel.Text += new Godot.Collections.Array<String>{
+					"You call that a drink?",
+					"Disgusting!",
+					"What is this ?!",
+				}.PickRandom();
+			}
+
+			if (percentPerfect > 0.95) {
+				textParticle.TextLabel.Text = "[wave amp=50.0 freq=10.0 connected=1]" + textParticle.TextLabel.Text;
 			}
 
 			EmitSignal(SignalName.OrderFullfilled);
@@ -186,6 +238,14 @@ public partial class Npc : Node2D
 	public void SetOrder(Soda.Cocktail newCocktail, Soda.Fizz newFizzLevel) {
 		cocktail = newCocktail;
 		fizzLevel = newFizzLevel;
-		SpeachBubble.Text = $"One {Soda.GetName(cocktail)},\n{Soda.GetFizzName(fizzLevel)}";
+		float fizziness = Soda.GetFizzinessOfLevel(fizzLevel);
+		Color color = Soda.GetFizzColor(fizziness);
+		color = Colors.Black.Lerp(color, Mathf.Clamp(Mathf.Remap(fizziness, 0.2f, 0.3f, 0.0f, 1.0f), 0.0f, 1.0f));
+		
+		SpeachBubble.Text = new Godot.Collections.Array<String>{
+			$"One {Soda.GetName(cocktail)},\n[color={color.ToHtml()}]{Soda.GetFizzName(fizzLevel)}[/color]",
+			$"A {Soda.GetName(cocktail)},\n[color={color.ToHtml()}]{Soda.GetFizzName(fizzLevel)}[/color] please.",
+			$"I'll have a {Soda.GetName(cocktail)},\n[color={color.ToHtml()}]{Soda.GetFizzName(fizzLevel)}[/color]."
+		}.PickRandom();
 	}
 }

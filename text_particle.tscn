@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqjxyu45p17o2"]
+[gd_scene load_steps=3 format=3 uid="uid://c3rkaafcmo6o8"]
 
 [ext_resource type="FontFile" uid="uid://bcbrhj01os4y7" path="res://assets/Kalam/Kalam-Bold.ttf" id="1_0acks"]
 [ext_resource type="Script" path="res://TextParticle.cs" id="2_7j8pv"]
@@ -8,17 +8,16 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2_7j8pv")
 
-[node name="Label" type="Label" parent="."]
-custom_minimum_size = Vector2(800, 200)
+[node name="Label" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(800, 100)
 layout_mode = 1
-offset_left = -391.0
-offset_top = -97.0
-offset_right = 409.0
-offset_bottom = 103.0
+offset_left = -399.0
+offset_top = -46.0
+offset_right = 401.0
+offset_bottom = 54.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("1_0acks")
-theme_override_font_sizes/font_size = 64
-text = "Perfect!"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_fonts/normal_font = ExtResource("1_0acks")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]Perfect!"

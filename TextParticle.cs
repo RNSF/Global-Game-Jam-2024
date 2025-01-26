@@ -7,8 +7,8 @@ public partial class TextParticle : Control
 
 	float animationTime = 5.0f;
 
-	public Label TextLabel {
-		get => GetNode<Label>("Label");
+	public RichTextLabel TextLabel {
+		get => GetNode<RichTextLabel>("Label");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,11 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://s4c0xi4t2o62"]
+[gd_scene load_steps=22 format=3 uid="uid://s4c0xi4t2o62"]
 
 [ext_resource type="Script" path="res://Npc.cs" id="1_k5ihh"]
 [ext_resource type="Texture2D" uid="uid://buagw0glkdcgh" path="res://assets/BarNPC01.png" id="2_i280y"]
 [ext_resource type="PackedScene" uid="uid://dhbidavdfsggp" path="res://order_bubble.tscn" id="3_5od2i"]
+[ext_resource type="Texture2D" uid="uid://dxu4ytraljvdw" path="res://assets/BarNPCS_baldman.png" id="3_x6uqy"]
 [ext_resource type="Script" path="res://PlacementZone.cs" id="4_2oxbe"]
 [ext_resource type="Texture2D" uid="uid://clc08t56jgu0o" path="res://assets/placement_ring.png" id="4_23q7x"]
+[ext_resource type="Texture2D" uid="uid://dsf51wqq7g2d3" path="res://assets/BarNPCS_female.png" id="4_awfa6"]
 [ext_resource type="Script" path="res://OscillatingNode2D.cs" id="5_geks5"]
+[ext_resource type="Texture2D" uid="uid://b2pmi03pmw688" path="res://assets/BarNPCS_olderman.png" id="5_s0ouw"]
 [ext_resource type="Texture2D" uid="uid://c207f4atf0bvh" path="res://assets/arrow.png" id="6_igclo"]
 [ext_resource type="AudioStream" uid="uid://2fpbm1nxs1vb" path="res://assets/sounds/SuccessSFX.wav" id="8_1p5r5"]
 [ext_resource type="AudioStream" uid="uid://bcgbfmvdabber" path="res://assets/sounds/Customer Grunts/OrderGrunt1.wav" id="9_4tcuu"]
@@ -36,9 +39,29 @@ stream_2/stream = ExtResource("15_34kp0")
 [node name="Npc" type="Node2D"]
 script = ExtResource("1_k5ihh")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Sprite"]
 position = Vector2(-1, 1)
 texture = ExtResource("2_i280y")
+
+[node name="Sprite2" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(-1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_x6uqy")
+
+[node name="Sprite3" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(-1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_awfa6")
+
+[node name="Sprite4" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(-1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_s0ouw")
 
 [node name="OrderBubble" parent="." instance=ExtResource("3_5od2i")]
 visible = false
@@ -69,7 +92,7 @@ amplitude = 20.0
 frequency = 9.425
 
 [node name="Arrow" type="Sprite2D" parent="PlacementZone/Sprites/ArrowCenter"]
-position = Vector2(-3, 5.37489)
+position = Vector2(-3, 6.95183)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_igclo")
 metadata/_edit_lock_ = true

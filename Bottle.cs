@@ -48,7 +48,6 @@ public partial class Bottle : RigidBody2D
 		this.BodyEntered += (body) => {
 			if (body is PhysicsBody2D physicsBody) {
 				var loudness = Mathf.Clamp(Mathf.Remap(LinearVelocity.Length(), 0.0f, 30.0f, 0.0f, 1.0f), 0.0f, 1.0f);
-				GD.Print(loudness);
 				if ((physicsBody.CollisionLayer & (CollisionLayers.BOTTLES | CollisionLayers.GLASS)) != 0) {
 					
 					BottleCollisionSound.VolumeDb = Mathf.LinearToDb(loudness);
@@ -90,8 +89,7 @@ public partial class Bottle : RigidBody2D
 			* fizzLevel * 30.0f;
 
 		if (BottleSprite.Material is ShaderMaterial shaderMaterial) {
-			Color col = new Color(1.0f, 1.0f, 0.0f, 1.0f).Lerp(new Color(1.0f, 0.0f, 0.0f, 1.0f), fizzLevel);
-			col.A = Mathf.Clamp(Mathf.Lerp(0.0f, 1.0f, fizzLevel * 4.0f), 0.0f, 1.0f);
+			Color col = Soda.GetFizzColor(fizzLevel);
 			shaderMaterial.SetShaderParameter("color", col);
 			shaderMaterial.SetShaderParameter("width", Mathf.Lerp(4.0f, 8.0f, fizzLevel));
 		}
