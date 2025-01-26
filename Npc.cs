@@ -50,6 +50,8 @@ public partial class Npc : Node2D
     public override void _Ready()
     {
         PlacementArea.GlassServed += (glass) => {
+			if (glass.sodaVolume == 0.0) return;
+			
 			var compositionDistance = 0.0f;
 			var idealComposition = Soda.GetComposition(cocktail);
 			
@@ -59,12 +61,12 @@ public partial class Npc : Node2D
 
 			compositionDistance = Mathf.Clamp(compositionDistance, 0.0f, 1.0f);
 
-			var volumeDistance = Mathf.Max(glass.sodaVolume - 20000, 0) / 20000;
+			var volumeDistance = Mathf.Max(glass.sodaVolume - 18000, 0) / 18000;
 
 			var percentPerfect = (1 - volumeDistance) * (1 - compositionDistance);
-			GD.Print(volumeDistance, ", ", percentPerfect);
+			GD.Print(percentPerfect);
 
-			glass.Destroy();
+			glass.DestroyFluid();
 
 			CurrentState = State.WALK_OUT;
 		};

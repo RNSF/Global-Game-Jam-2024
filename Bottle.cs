@@ -43,7 +43,7 @@ public partial class Bottle : RigidBody2D
 				pourTimer += 1.0f / pourRate;
 			}
 
-			sodaFluid.CreateParticle(FluidSpawnPoint.GlobalPosition, Vector2.Up.Rotated(GlobalRotation) * fizzLevel * 1000.0f,sodaType);
+			sodaFluid.CreateParticle(FluidSpawnPoint.GlobalPosition, Vector2.Up.Rotated(GlobalRotation) * fizzLevel * 2000.0f,sodaType);
 
 			ApplyImpulse(-Vector2.Right.Rotated(GlobalRotation) * 5.0f);
 		} else {
@@ -53,10 +53,8 @@ public partial class Bottle : RigidBody2D
 		var acceleration = (LinearVelocity - previousLinearVelocity).Length() / ((float)delta);
 		
 		fizzLevel += acceleration / 80000 * (float) delta;
-		fizzLevel -= (isPickedUp ? 0.01f  : 0.1f )* (float) delta;
+		fizzLevel -= (isPickedUp ? 0.05f  : 0.1f )* (float) delta;
 		fizzLevel = Mathf.Clamp(fizzLevel, 0.0f, 1.0f);
-
-		if (fizzLevel > 0.1) GD.Print(fizzLevel);
 
 
 		previousLinearVelocity = LinearVelocity;

@@ -24,9 +24,11 @@ public partial class PlacementZone : Area2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Sprites.Visible = Global.isGlassHeld;
-		foreach(var node in GetOverlappingBodies()) {
-			if (node is Glass glass && glass.CanServe()) {
-				EmitSignal(SignalName.GlassServed, glass);
+		if (Monitoring) {
+			foreach(var node in GetOverlappingBodies()) {
+				if (node is Glass glass && glass.CanServe()) {
+					EmitSignal(SignalName.GlassServed, glass);
+				}
 			}
 		}
 	}

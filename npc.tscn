@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://s4c0xi4t2o62"]
 
 [ext_resource type="Script" path="res://Npc.cs" id="1_k5ihh"]
-[ext_resource type="Texture2D" uid="uid://ddr1yifyaxyqp" path="res://temp_assets/cowboy.png" id="1_qfb3y"]
+[ext_resource type="Texture2D" uid="uid://buagw0glkdcgh" path="res://assets/BarNPC01.png" id="2_i280y"]
 [ext_resource type="PackedScene" uid="uid://dhbidavdfsggp" path="res://order_bubble.tscn" id="3_5od2i"]
 [ext_resource type="Script" path="res://PlacementZone.cs" id="4_2oxbe"]
 [ext_resource type="Texture2D" uid="uid://clc08t56jgu0o" path="res://assets/placement_ring.png" id="4_23q7x"]
@@ -16,9 +16,8 @@ height = 335.0
 script = ExtResource("1_k5ihh")
 
 [node name="Cowboy" type="Sprite2D" parent="."]
-position = Vector2(9.99998, 84)
-scale = Vector2(0.699275, 0.699275)
-texture = ExtResource("1_qfb3y")
+position = Vector2(-1, 1)
+texture = ExtResource("2_i280y")
 
 [node name="OrderBubble" parent="." instance=ExtResource("3_5od2i")]
 visible = false
@@ -29,32 +28,33 @@ offset_bottom = -130.0
 Text = "[center]Alright pin head, your time is up."
 
 [node name="PlacementZone" type="Area2D" parent="."]
-position = Vector2(-2, 135)
+z_index = 1
+position = Vector2(-5, 189)
 scale = Vector2(0.8, 0.8)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_2oxbe")
 
 [node name="Sprites" type="Node2D" parent="PlacementZone"]
-scale = Vector2(1, 1)
+metadata/_edit_lock_ = true
 
 [node name="RingSprite" type="Sprite2D" parent="PlacementZone/Sprites"]
-scale = Vector2(1, 1)
 texture = ExtResource("4_23q7x")
 
 [node name="ArrowCenter" type="Node2D" parent="PlacementZone/Sprites"]
 position = Vector2(3.75, -91.25)
-scale = Vector2(1, 1)
 script = ExtResource("5_geks5")
 amplitude = 20.0
 frequency = 9.425
 
 [node name="Arrow" type="Sprite2D" parent="PlacementZone/Sprites/ArrowCenter"]
-position = Vector2(-3, -17.7527)
+position = Vector2(-3, -19.6805)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_igclo")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementZone"]
+z_index = 1
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6y634")
+metadata/_edit_lock_ = true

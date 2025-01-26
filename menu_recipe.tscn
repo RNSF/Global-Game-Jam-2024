@@ -20,3 +20,4 @@ vertical_alignment = 1
 
 [node name="Ingredients" type="HBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 20

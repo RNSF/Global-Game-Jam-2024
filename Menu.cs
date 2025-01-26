@@ -47,7 +47,6 @@ public partial class Menu : Control
         if (Engine.IsEditorHint()) return;
 
 		
-		GD.Print(isActive);
 		if (ActivePosition != null && UnactivePosition != null) {
 			GlobalPosition = GlobalPosition.Lerp((isActive ? (ActivePosition) : (UnactivePosition)).GlobalPosition, ((float)delta) * 10.0f);
 		}

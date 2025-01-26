@@ -1,77 +1,93 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=21 format=3 uid="uid://dqm15qcln6w26"]
 
 [ext_resource type="PackedScene" uid="uid://cqtrueykh3fou" path="res://npc_spawn_point.tscn" id="1_blhfc"]
-[ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_l5e8w"]
+[ext_resource type="Texture2D" uid="uid://bogdpkyw5qd8e" path="res://assets/BarBG.png" id="1_qaao2"]
 [ext_resource type="PackedScene" uid="uid://cc0n8wgdkc85y" path="res://mouse.tscn" id="2_gaf3q"]
 [ext_resource type="PackedScene" uid="uid://b1utibb208qk0" path="res://soda_fluid.tscn" id="3_3a48s"]
 [ext_resource type="Script" path="res://Table.cs" id="4_ktyc2"]
 [ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
+[ext_resource type="Texture2D" uid="uid://dwstq72mevl26" path="res://assets/BarWorkbench.png" id="5_nx0io"]
+[ext_resource type="PackedScene" uid="uid://cwdlqvlbsg4i" path="res://ginger_bottle.tscn" id="6_ocoeu"]
+[ext_resource type="PackedScene" uid="uid://cbdmpcekvkbt" path="res://cranberry_bottle.tscn" id="7_a4pkt"]
 [ext_resource type="Script" path="res://Npcs.cs" id="7_hk5re"]
+[ext_resource type="PackedScene" uid="uid://b2sp5f6rromhm" path="res://cola_bottle.tscn" id="8_8yhkq"]
 [ext_resource type="PackedScene" uid="uid://xrxdsj3srtr6" path="res://menu.tscn" id="8_56oin"]
+[ext_resource type="PackedScene" uid="uid://baxewn0mll8i5" path="res://club_bottle.tscn" id="9_p2v4p"]
+[ext_resource type="Texture2D" uid="uid://b2cgmu3wkiox" path="res://assets/BarCounter.png" id="10_u0f3d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1eixp"]
-size = Vector2(1967, 673)
+size = Vector2(1967, 605)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d71ei"]
-size = Vector2(144.875, 251.5)
+size = Vector2(521, 1520)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b7cf"]
+size = Vector2(2943, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8yfq"]
-size = Vector2(2003, 151.5)
+size = Vector2(2003, 146)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h27j5"]
-size = Vector2(1323, 247)
+size = Vector2(1287, 201)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trik3"]
+size = Vector2(389, 1497)
 
 [node name="GameScene" type="Node2D"]
 
+[node name="BarBg" type="Sprite2D" parent="."]
+position = Vector2(-5, -350)
+texture = ExtResource("1_qaao2")
+
 [node name="NPCSpawnPoint" parent="." instance=ExtResource("1_blhfc")]
-position = Vector2(587.5, -272)
+position = Vector2(587.5, -278.5)
 
 [node name="NPCSpawnPoint2" parent="." instance=ExtResource("1_blhfc")]
-position = Vector2(0.5, -275)
+position = Vector2(0.5, -281.5)
 
 [node name="NPCSpawnPoint3" parent="." instance=ExtResource("1_blhfc")]
-position = Vector2(-604, -281.5)
+position = Vector2(-604, -288)
 
 [node name="NPCs" type="Node2D" parent="."]
 script = ExtResource("7_hk5re")
 
 [node name="StartPointLeft" type="Marker2D" parent="NPCs"]
-position = Vector2(-1251, -280)
+position = Vector2(-1251, -286.5)
 
 [node name="StartPointRight" type="Marker2D" parent="NPCs"]
-position = Vector2(1237, -271)
+position = Vector2(1237, -277.5)
 
 [node name="Bar" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bar"]
-position = Vector2(0.5, 206.5)
+position = Vector2(0.5, 240.5)
 shape = SubResource("RectangleShape2D_1eixp")
 
-[node name="Bottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
-position = Vector2(-481, 157)
-sodaFluid = NodePath("../SodaFluid")
-sodaType = 1
+[node name="BarWorkbench" type="Sprite2D" parent="."]
+position = Vector2(0, 166)
+texture = ExtResource("5_nx0io")
 
-[node name="Bottle5" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
-position = Vector2(-372, 159)
+[node name="BarCounter" type="Sprite2D" parent="."]
+position = Vector2(0, -74)
+texture = ExtResource("10_u0f3d")
+
+[node name="GingerBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("6_ocoeu")]
+position = Vector2(-504, 185)
 sodaFluid = NodePath("../SodaFluid")
 
-[node name="Bottle2" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
-position = Vector2(-604, 156)
+[node name="CranberryBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("7_a4pkt")]
+position = Vector2(-831, 215)
 sodaFluid = NodePath("../SodaFluid")
-sodaType = 2
 
-[node name="Bottle3" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
-position = Vector2(-709, 168)
+[node name="ColaBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("8_8yhkq")]
+position = Vector2(-648, 197)
 sodaFluid = NodePath("../SodaFluid")
-sodaType = 3
 
-[node name="Bottle4" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("1_l5e8w")]
-position = Vector2(-806, 166)
+[node name="ClubBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("9_p2v4p")]
+position = Vector2(-373, 181)
 sodaFluid = NodePath("../SodaFluid")
-sodaType = 4
 
 [node name="Table" type="RigidBody2D" parent="." node_paths=PackedStringArray("sodaFluid")]
 collision_layer = 17
@@ -86,47 +102,59 @@ script = ExtResource("4_ktyc2")
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Table"]
-position = Vector2(-938.438, 280)
+position = Vector2(-1187.5, -300)
 shape = SubResource("RectangleShape2D_d71ei")
 
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Table"]
+position = Vector2(-131.5, -1119)
+shape = SubResource("RectangleShape2D_2b7cf")
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Table"]
-position = Vector2(-0.5, 464.25)
+position = Vector2(-0.5, 467)
 shape = SubResource("RectangleShape2D_s8yfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
-position = Vector2(362.5, 282.5)
+position = Vector2(352.5, 305.5)
 shape = SubResource("RectangleShape2D_h27j5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Table"]
+position = Vector2(1129.5, -342.5)
+shape = SubResource("RectangleShape2D_trik3")
 
 [node name="Mouse" parent="." instance=ExtResource("2_gaf3q")]
 
 [node name="SodaFluid" parent="." instance=ExtResource("3_3a48s")]
 
-[node name="Glass" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
-position = Vector2(-5, 37)
-contact_monitor = true
-max_contacts_reported = 6
-sodaFluid = NodePath("../SodaFluid")
-
-[node name="Glass2" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
-position = Vector2(193, 33)
-contact_monitor = true
-max_contacts_reported = 6
-sodaFluid = NodePath("../SodaFluid")
-
-[node name="Glass3" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
-position = Vector2(352, 33)
-contact_monitor = true
-max_contacts_reported = 6
-sodaFluid = NodePath("../SodaFluid")
-
 [node name="Glass4" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
-position = Vector2(511, 26)
+position = Vector2(815, 91)
+rotation = 3.14159
+contact_monitor = true
+max_contacts_reported = 6
+sodaFluid = NodePath("../SodaFluid")
+
+[node name="Glass5" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+position = Vector2(815, -92)
+rotation = 3.14159
+contact_monitor = true
+max_contacts_reported = 6
+sodaFluid = NodePath("../SodaFluid")
+
+[node name="Glass6" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+position = Vector2(620, 87)
+rotation = 3.14159
+contact_monitor = true
+max_contacts_reported = 6
+sodaFluid = NodePath("../SodaFluid")
+
+[node name="Glass7" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("4_oecaf")]
+position = Vector2(622, -93)
+rotation = 3.14159
 contact_monitor = true
 max_contacts_reported = 6
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-12, -89)
+position = Vector2(0, -89)
 
 [node name="Menu" parent="." instance=ExtResource("8_56oin")]
 anchors_preset = 0

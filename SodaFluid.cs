@@ -17,7 +17,7 @@ public partial class SodaFluid : Node2D
 	}
 
 	const float MIN_PARTICLE_RADIUS = 6.0f;
-	const float MAX_PARTICLE_RADIUS = 9.0f;
+	const float MAX_PARTICLE_RADIUS = 8.0f;
 	public Dictionary<Rid, Particle> bodyToParticle = new Dictionary<Rid, Particle>();
 	
 	CanvasGroup SodaCanvasGroup {
@@ -25,7 +25,8 @@ public partial class SodaFluid : Node2D
 	}
 
     public override void _Ready() {
-        
+		
+        PhysicsServer2D.SpaceSetParam(GetWorld2D().Space, PhysicsServer2D.SpaceParameter.SolverIterations, 20.0f);
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -61,14 +62,17 @@ public partial class SodaFluid : Node2D
 		PhysicsServer2D.BodySetCollisionMask(body, CollisionLayers.FLUID | CollisionLayers.SOLID);
 		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.Friction, 0.0);
 		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.Mass, 0.05);
-		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.GravityScale, 1.0);
+		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.GravityScale, 0.5);
+		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.Bounce, 0.0);
+		PhysicsServer2D.BodySetParam(body, PhysicsServer2D.BodyParameter.LinearDamp, 0.1);
 		PhysicsServer2D.BodySetState(body, PhysicsServer2D.BodyState.Transform, particleTransform);
 		PhysicsServer2D.BodySetState(body, PhysicsServer2D.BodyState.LinearVelocity, particleVelocity);
+		PhysicsServer2D.BodySetContinuousCollisionDetectionMode(body, PhysicsServer2D.CcdMode.CastRay);
 
 		var canvasItem = RenderingServer.CanvasItemCreate();
 		RenderingServer.CanvasItemSetParent(canvasItem, SodaCanvasGroup.GetCanvasItem());
 		RenderingServer.CanvasItemSetTransform(canvasItem, particleTransform);
-		RenderingServer.CanvasItemAddCircle(canvasItem, Vector2.Zero, particleRadius * 2.0f, Colors.White, true);
+		RenderingServer.CanvasItemAddCircle(canvasItem, Vector2.Zero, particleRadius * 2.0f, Colors.White, false);
 		RenderingServer.CanvasItemSetModulate(canvasItem, Soda.GetColor(sodaType));
 
 		float[] sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];

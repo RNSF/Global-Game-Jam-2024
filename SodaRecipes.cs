@@ -16,16 +16,15 @@ public partial class Soda : Node
 	public enum Type {
 		CLUB,
 		CRANBERRY,
-		ORANGE,
 		GINGER,
-		MAGIC,
+		COLA,
 	};
 
 	public enum Cocktail {
 		CLASSIC_CLUB,
 		CRANBERRY_FEVER,
 		CRANBERRY_SURPRISE,
-		ORANGE,
+		COLA,
 		MELLOW_GINGER,
 		MIGHTY_GINGER,
 
@@ -49,10 +48,10 @@ public partial class Soda : Node
 				new Ingredient(1, Type.CLUB) };
 			case Cocktail.CRANBERRY_SURPRISE: return new Ingredient[] { 
 				new Ingredient(2, Type.CRANBERRY), 
-				new Ingredient(1, Type.ORANGE), 
+				new Ingredient(1, Type.COLA), 
 				new Ingredient(1, Type.CLUB) };
-			case Cocktail.ORANGE: return new Ingredient[] { 
-				new Ingredient(1, Type.ORANGE) };
+			case Cocktail.COLA: return new Ingredient[] { 
+				new Ingredient(1, Type.COLA) };
 			case Cocktail.MELLOW_GINGER: return new Ingredient[] { 
 				new Ingredient(1, Type.GINGER), 
 				new Ingredient(2, Type.CLUB) };
@@ -88,8 +87,8 @@ public partial class Soda : Node
 				return "Cranberry Fever";
 			case Cocktail.CRANBERRY_SURPRISE:
 				return "Cranberry Surprise";
-			case Cocktail.ORANGE:
-				return "Orange POWA™";
+			case Cocktail.COLA:
+				return "Cola POWA™";
 			case Cocktail.MELLOW_GINGER:
 				return "Mellow Ginger";
 			case Cocktail.MIGHTY_GINGER:
@@ -111,11 +110,10 @@ public partial class Soda : Node
 	static public Color GetColor(Type type) {
 		switch(type) {
 			default:
-			case Type.CLUB: return Colors.LightGray;
-			case Type.CRANBERRY: return Colors.DarkRed;
-			case Type.ORANGE: return Colors.Orange;
-			case Type.GINGER: return Colors.Beige;
-			case Type.MAGIC: return Colors.Black;
+			case Type.CLUB: 		return new Color("#d3dcdeff");
+			case Type.CRANBERRY: 	return new Color("#b01e3bff");
+			case Type.GINGER: 		return new Color("#abb04aff");
+			case Type.COLA: 		return new Color("#471409ff");
 		}
 	}
 }

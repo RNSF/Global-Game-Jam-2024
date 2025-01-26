@@ -42,9 +42,8 @@ public partial class MenuIngredient : HBoxContainer
 			switch(value) {
 				case Soda.Type.CLUB:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
 				case Soda.Type.CRANBERRY:	BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
-				case Soda.Type.ORANGE:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
 				case Soda.Type.GINGER:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
-				case Soda.Type.MAGIC:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
+				case Soda.Type.COLA:		BottleIcon.Texture = GD.Load<Texture2D>("res://temp_assets/glass.svg"); break;
 			}
 		}
 	}

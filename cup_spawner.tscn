@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxkcgj13oq3xn"]
+
+[ext_resource type="Texture2D" uid="uid://cs4xsgwr3s67b" path="res://assets/BarGlass.png" id="1_so0qc"]
+
+[node name="CupSpawner" type="Area2D"]
+
+[node name="BarGlass2" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(14, 92)
+rotation = -3.14159
+texture = ExtResource("1_so0qc")
+
+[node name="BarGlass4" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(13.5, -13.5)
+rotation = -3.14159
+texture = ExtResource("1_so0qc")
+
+[node name="BarGlass" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(-90.5, 90.5)
+rotation = 3.14159
+texture = ExtResource("1_so0qc")
+
+[node name="BarGlass3" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(-90, -6)
+rotation = 3.14159
+texture = ExtResource("1_so0qc")

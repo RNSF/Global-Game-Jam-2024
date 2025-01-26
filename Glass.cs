@@ -28,6 +28,8 @@ public partial class Glass : RigidBody2D
 	ConvexPolygonShape2D innerShape;
 	public float[] sodaComposition;
 	public float sodaVolume;
+	int tick;
+	private Vector2 previousGlobalPosition;
 
 
 
@@ -41,6 +43,7 @@ public partial class Glass : RigidBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
 	{
+		
 		isBehindBar = InnerArea.GetOverlappingBodies().Any((Node2D node) => {
 			if (node is PhysicsBody2D body) {
 				return (body.CollisionMask & CollisionLayers.BAR) != 0;
@@ -48,7 +51,7 @@ public partial class Glass : RigidBody2D
 			return false;
 		});
 
-		if (isBehindBar || isPickedUp) {
+		if (isBehindBar || isPickedUp || (tick < 1)) {
 			CollisionMask &= ~CollisionLayers.BAR;
 		} else {
 			CollisionMask |= CollisionLayers.BAR;
@@ -65,32 +68,39 @@ public partial class Glass : RigidBody2D
 			if (!sodaFluid.bodyToParticle.ContainsKey(rid)) continue;
 			SodaFluid.Particle particle = sodaFluid.bodyToParticle[rid];
 
+			float volume = particle.radius * particle.radius;
+			sodaVolume += volume;
+
 			for (int i = 0; i < sodaComposition.Count(); i++) {
-				float volume = particle.radius * particle.radius;
-				sodaVolume += volume;
 				sodaComposition[i] += particle.sodaComposition[i] * volume;
 			}
 		}
 
 		if (sodaVolume > 0) {
+			Color color = Colors.Black;
+
 			for (int i = 0; i < sodaComposition.Count(); i++) {
 				sodaComposition[i] /= sodaVolume;
+				color += sodaComposition[i] * Soda.GetColor((Soda.Type) i);
 			}
+			
 
 			foreach (var result in results) {
 				Rid rid = result["rid"].As<Rid>();
 				SodaFluid.Particle particle = sodaFluid.bodyToParticle[rid];
-				Color color = Colors.Black;
 
 				for (int i = 0; i < sodaComposition.Count(); i++) {
 					particle.sodaComposition[i] = sodaComposition[i];
-					color += particle.sodaComposition[i] * Soda.GetColor((Soda.Type) i);
 				}
 
 				
 				RenderingServer.CanvasItemSetModulate(particle.canvasItem, color);
 			}
 		}
+
+
+		previousGlobalPosition = GlobalPosition;
+		tick ++;
 
 	}
 
@@ -112,15 +122,13 @@ public partial class Glass : RigidBody2D
 		return !isBehindBar && isOnBar && Mathf.AngleDifference(GlobalRotation, 0) < 0.05;
 	}
 
-	public void Destroy() {
+	public void DestroyFluid() {
 		var results = SodaCheck();
 
 		foreach (var result in results) {
 			Rid rid = result["rid"].As<Rid>();
 			sodaFluid.DestroyParticle(rid);
 		}
-
-		QueueFree();
 	}
 
 	public Godot.Collections.Array<Godot.Collections.Dictionary> SodaCheck() {

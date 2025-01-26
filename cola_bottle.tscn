@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2sp5f6rromhm"]
+
+[ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_0hwma"]
+[ext_resource type="Texture2D" uid="uid://b1mrl2eek0428" path="res://assets/Bottle03.png" id="2_fpp5l"]
+
+[node name="ColaBottle" instance=ExtResource("1_0hwma")]
+sodaType = 3
+
+[node name="Bottle" parent="." index="0"]
+scale = Vector2(1, 1)
+texture = ExtResource("2_fpp5l")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(-44, 180, -61, -12, -20, -54, -21, -175, 26, -176, 25, -54, 65, -15, 48, 180)
+
+[node name="FluidSpawnPoint" parent="." index="2"]
+position = Vector2(0, -217)
