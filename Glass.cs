@@ -32,6 +32,7 @@ public partial class Glass : RigidBody2D
 	ConvexPolygonShape2D innerShape;
 	public float[] sodaComposition;
 	public float sodaVolume;
+	public float fizzLevel;
 	int tick;
 	private Vector2 previousGlobalPosition;
 
@@ -66,6 +67,7 @@ public partial class Glass : RigidBody2D
 
 		sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
 		sodaVolume = 0.0f;
+		fizzLevel = 0.0f;
 
 		foreach (var result in results) {
 			Rid rid = result["rid"].As<Rid>();
@@ -74,6 +76,7 @@ public partial class Glass : RigidBody2D
 
 			float volume = particle.radius * particle.radius;
 			sodaVolume += volume;
+			fizzLevel += particle.fizziness * volume;
 
 			for (int i = 0; i < sodaComposition.Count(); i++) {
 				sodaComposition[i] += particle.sodaComposition[i] * volume;
@@ -83,6 +86,7 @@ public partial class Glass : RigidBody2D
 		if (sodaVolume > 0) {
 			Color color = Colors.Black;
 
+			fizzLevel /= sodaVolume;
 			for (int i = 0; i < sodaComposition.Count(); i++) {
 				sodaComposition[i] /= sodaVolume;
 				color += sodaComposition[i] * Soda.GetColor((Soda.Type) i);
@@ -93,6 +97,7 @@ public partial class Glass : RigidBody2D
 				Rid rid = result["rid"].As<Rid>();
 				SodaFluid.Particle particle = sodaFluid.bodyToParticle[rid];
 
+				particle.fizziness = fizzLevel;
 				for (int i = 0; i < sodaComposition.Count(); i++) {
 					particle.sodaComposition[i] = sodaComposition[i];
 				}
@@ -101,6 +106,8 @@ public partial class Glass : RigidBody2D
 				RenderingServer.CanvasItemSetModulate(particle.canvasItem, color);
 			}
 		}
+
+		SodaSurfaceNode.fizziness = fizzLevel;
 
 
 		previousGlobalPosition = GlobalPosition;

@@ -14,6 +14,7 @@ public partial class SodaFluid : Node2D
 		public Rid canvasItem;
 		public float[] sodaComposition;
 		public float radius;
+		public float fizziness;
 	}
 
 	const float MIN_PARTICLE_RADIUS = 6.0f;
@@ -32,7 +33,7 @@ public partial class SodaFluid : Node2D
     public override void _PhysicsProcess(double delta) {
 
 		if (Input.IsActionPressed("debug_1")) {
-			CreateParticle(GetGlobalMousePosition(), Vector2.Zero, Soda.Type.CRANBERRY);
+			CreateParticle(GetGlobalMousePosition(), Vector2.Zero, 0.0f, Soda.Type.CRANBERRY);
 		}
 
 		foreach(var particle in bodyToParticle.Values) {
@@ -43,7 +44,7 @@ public partial class SodaFluid : Node2D
 		}
 	}
 
-	public void CreateParticle(Vector2 particlePosition, Vector2 particleVelocity, Soda.Type sodaType) {
+	public void CreateParticle(Vector2 particlePosition, Vector2 particleVelocity, float fizziness, Soda.Type sodaType) {
 		// based on https://github.com/Chevifier/Fluid-Simulation-in-Godot/blob/main/FluidSim2D/WaterGenPhysicsServer.gd
 
 		if (!IsNodeReady()) return;
@@ -78,7 +79,7 @@ public partial class SodaFluid : Node2D
 
 		float[] sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
 		sodaComposition[(int) sodaType] = 1.0f;
-		var particle = new Particle {body = body, canvasItem = canvasItem, sodaComposition = sodaComposition, radius = particleRadius};
+		var particle = new Particle {body = body, canvasItem = canvasItem, sodaComposition = sodaComposition, radius = particleRadius, fizziness = fizziness};
 		bodyToParticle.Add(body, particle);
 	}
 

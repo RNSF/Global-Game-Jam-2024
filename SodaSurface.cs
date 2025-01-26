@@ -21,6 +21,8 @@ public partial class SodaSurface : SubViewportContainer
 		get => GetNode<Camera2D>("SubViewport/Camera2D");
 	}
 
+	public float fizziness;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -41,8 +43,11 @@ public partial class SodaSurface : SubViewportContainer
 		// SubCamera.GlobalTransform = GetGlobalTransform();
 		SubCamera.GlobalRotation = GetGlobalTransform().Rotation;
 		SubCamera.GlobalPosition = (Size / 2).Rotated(GetGlobalTransform().Rotation) + GetGlobalTransform().Origin;
-		GD.Print(GetGlobalTransform().Rotation);
-		GD.Print(SubCamera.GlobalPosition);
+
+		BubbleParticles.AmountRatio = Mathf.Pow(0.1f, Mathf.Lerp(0.0f, 3.0f, fizziness)) ;
+		if (CanvasGroupNode.Material is ShaderMaterial shaderMaterial) {
+			shaderMaterial.SetShaderParameter("line_thickness", Mathf.Lerp(2.0f, 4.0f, fizziness));
+		}
 		// SubCamera.GlobalPosition =  GetViewport().GetCamera2D().GlobalPosition - GetParent<Node2D>().GlobalPosition ;
 		
         //SubCamera.GlobalPosition = SubCamera.GlobalPosition + new Vector2( Input.GetAxis("ui_left", "ui_right"),  Input.GetAxis("ui_up", "ui_down")) * 100.0f * ((float)delta);
@@ -53,7 +58,7 @@ public partial class SodaSurface : SubViewportContainer
 		if (BubbleParticles.ProcessMaterial is ParticleProcessMaterial mat) {
 			mat.EmissionBoxExtents = new Vector3(size.X / 2, Size.Y / 2, 0);
 			mat.EmissionShapeOffset = new Vector3(size.X / 2, Size.Y / 2, 0);
-			BubbleParticles.Amount = (int) (size.X * size.Y * 0.01f);
+			BubbleParticles.Amount = (int) (Size.X * Size.Y * 0.1f);
 		};
 
 		SubCamera.GlobalPosition = Size / 2;

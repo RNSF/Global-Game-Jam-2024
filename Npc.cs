@@ -70,12 +70,22 @@ public partial class Npc : Node2D
 				compositionDistance += Mathf.Abs(idealComposition[i] - glass.sodaComposition[i]);
 			}
 
+			float idealFizziness = 0.0f;
+			switch (fizzLevel) {
+				case Soda.Fizz.FLAT: 		idealFizziness = 0.0f; break;
+				case Soda.Fizz.LIGHT:		idealFizziness = 0.3f; break;
+				case Soda.Fizz.STANDARD:	idealFizziness = 0.6f; break;
+				case Soda.Fizz.EXTRA:		idealFizziness = 0.9f; break;
+			}
+
+			float fizzDistance = Mathf.Clamp(Mathf.Remap(Mathf.Abs(idealFizziness - glass.fizzLevel), 0.3f, 0.6f, 0.0f, 1.0f), 0.0f, 1.0f);
+
 			compositionDistance = Mathf.Clamp(compositionDistance, 0.0f, 1.0f);
 
 			var volumeDistance = Mathf.Max(glass.sodaVolume - 18000, 0) / 18000;
 
-			var percentPerfect = (1 - volumeDistance) * (1 - compositionDistance);
-			GD.Print(percentPerfect, ", ", compositionDistance, ", ", volumeDistance);
+			var percentPerfect = (1 - volumeDistance) * (1 - compositionDistance) * (1 - fizzDistance);
+			GD.Print(percentPerfect, ", ", compositionDistance, ", ", volumeDistance, ", ", fizzDistance);
 
 			glass.DestroyFluid();
 

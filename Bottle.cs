@@ -43,7 +43,7 @@ public partial class Bottle : RigidBody2D
 				pourTimer += 1.0f / pourRate;
 			}
 
-			sodaFluid.CreateParticle(FluidSpawnPoint.GlobalPosition, Vector2.Up.Rotated(GlobalRotation) * fizzLevel * 2000.0f,sodaType);
+			sodaFluid.CreateParticle(FluidSpawnPoint.GlobalPosition, Vector2.Up.Rotated(GlobalRotation) * fizzLevel * 2000.0f, fizzLevel, sodaType);
 
 			ApplyImpulse(-Vector2.Right.Rotated(GlobalRotation) * 5.0f);
 		} else {
