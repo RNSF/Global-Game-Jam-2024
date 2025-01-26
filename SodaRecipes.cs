@@ -48,14 +48,14 @@ public partial class Soda : Node
 				new Ingredient(1, Type.CLUB), 
 				new Ingredient(1, Type.CLUB) };
 			case Cocktail.CRANBERRY_SURPRISE: return new Ingredient[] { 
-				new Ingredient(1, Type.ORANGE), 
 				new Ingredient(2, Type.CRANBERRY), 
+				new Ingredient(1, Type.ORANGE), 
 				new Ingredient(1, Type.CLUB) };
 			case Cocktail.ORANGE: return new Ingredient[] { 
 				new Ingredient(1, Type.ORANGE) };
 			case Cocktail.MELLOW_GINGER: return new Ingredient[] { 
 				new Ingredient(1, Type.GINGER), 
-				new Ingredient(3, Type.CLUB) };
+				new Ingredient(2, Type.CLUB) };
 			case Cocktail.MIGHTY_GINGER: return new Ingredient[] { 
 				new Ingredient(3, Type.GINGER), 
 				new Ingredient(1, Type.CLUB) };

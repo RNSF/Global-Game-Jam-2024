@@ -81,6 +81,8 @@ public partial class Mouse : Node2D
 			else 		 		PinJoint.NodeA = null;
 
 			SetBodyMode(Body, GrabLevel);
+
+			Global.isGlassHeld = Body is Glass;
 		} 	
 	}
 

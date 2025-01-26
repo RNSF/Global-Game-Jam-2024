@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://ti4of0fumx4g"]
+
+[ext_resource type="FontFile" uid="uid://bcbrhj01os4y7" path="res://assets/Kalam/Kalam-Bold.ttf" id="1_0jy6m"]
+[ext_resource type="Script" path="res://MenuIngredient.cs" id="1_5myjl"]
+[ext_resource type="Texture2D" uid="uid://d21kyf4yx36ga" path="res://temp_assets/glass.svg" id="3_exji7"]
+
+[node name="MenuIngredient" type="HBoxContainer"]
+script = ExtResource("1_5myjl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -7
+
+[node name="Numerator" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_0jy6m")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Padding" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Denominator" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_0jy6m")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+
+[node name="BottleIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = ExtResource("3_exji7")
+expand_mode = 4

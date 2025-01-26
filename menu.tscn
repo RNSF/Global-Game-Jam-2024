@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://xrxdsj3srtr6"]
+
+[ext_resource type="FontFile" uid="uid://bcbrhj01os4y7" path="res://assets/Kalam/Kalam-Bold.ttf" id="1_rwuqb"]
+[ext_resource type="Script" path="res://Menu.cs" id="1_u1l7d"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchor_right = 0.234
+anchor_bottom = 0.556
+offset_right = -0.280029
+offset_bottom = -0.480042
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u1l7d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 15.0
+offset_right = -22.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_rwuqb")
+theme_override_font_sizes/font_size = 40
+text = "Recipes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RecipesContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2

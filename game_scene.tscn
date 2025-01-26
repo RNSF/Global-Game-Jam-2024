@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=13 format=3 uid="uid://dqm15qcln6w26"]
 
 [ext_resource type="PackedScene" uid="uid://cqtrueykh3fou" path="res://npc_spawn_point.tscn" id="1_blhfc"]
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_l5e8w"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Table.cs" id="4_ktyc2"]
 [ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
 [ext_resource type="Script" path="res://Npcs.cs" id="7_hk5re"]
+[ext_resource type="PackedScene" uid="uid://xrxdsj3srtr6" path="res://menu.tscn" id="8_56oin"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1eixp"]
 size = Vector2(1967, 673)
@@ -126,3 +127,31 @@ sodaFluid = NodePath("../SodaFluid")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-12, -89)
+
+[node name="Menu" parent="." instance=ExtResource("8_56oin")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 400.0
+offset_top = 347.0
+offset_right = 873.0
+offset_bottom = 1051.0
+grow_horizontal = 1
+grow_vertical = 1
+mouse_filter = 1
+
+[node name="ActivePosition" type="Control" parent="Menu"]
+top_level = true
+anchors_preset = 0
+offset_left = 412.0
+offset_top = -242.0
+offset_right = 412.0
+offset_bottom = -242.0
+
+[node name="UnactivePosition" type="Control" parent="Menu"]
+top_level = true
+anchors_preset = 0
+offset_left = 412.0
+offset_top = 350.0
+offset_right = 412.0
+offset_bottom = 350.0

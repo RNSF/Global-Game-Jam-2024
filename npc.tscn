@@ -35,17 +35,23 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_2oxbe")
 
-[node name="RingSprite" type="Sprite2D" parent="PlacementZone"]
+[node name="Sprites" type="Node2D" parent="PlacementZone"]
+scale = Vector2(1, 1)
+
+[node name="RingSprite" type="Sprite2D" parent="PlacementZone/Sprites"]
+scale = Vector2(1, 1)
 texture = ExtResource("4_23q7x")
 
-[node name="ArrowCenter" type="Node2D" parent="PlacementZone"]
-position = Vector2(3, -147)
+[node name="ArrowCenter" type="Node2D" parent="PlacementZone/Sprites"]
+position = Vector2(3.75, -91.25)
+scale = Vector2(1, 1)
 script = ExtResource("5_geks5")
 amplitude = 20.0
 frequency = 9.425
 
-[node name="Arrow" type="Sprite2D" parent="PlacementZone/ArrowCenter"]
-position = Vector2(-3, -8.88215)
+[node name="Arrow" type="Sprite2D" parent="PlacementZone/Sprites/ArrowCenter"]
+position = Vector2(-3, -17.7527)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_igclo")
 metadata/_edit_lock_ = true
 
