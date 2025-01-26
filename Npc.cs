@@ -15,16 +15,29 @@ public partial class Npc : Node2D
 	public Node2D spawnPoint;
 	public Node2D endPoint;
 	private State _currentState = State.WALK_IN;
+	public Soda.Cocktail cocktail;
 	public State CurrentState {
 		get => _currentState;
 		set {
+			var oldState = _currentState;
 			_currentState = value;
 			switch (CurrentState) {
 				case State.WALK_IN: 	GetParent()?.MoveChild(this, 0); break;
 				case State.ORDERING: 	GetParent()?.MoveChild(this, -1); break;
 				case State.WALK_OUT: 	GetParent()?.MoveChild(this, 0); break;
 			}
+
+			bool isOrdering = CurrentState == State.ORDERING;
+			GetParent()?.MoveChild(this, isOrdering ? -1 : 0);
+			SpeachBubble.Visible = isOrdering;
+			if (oldState != _currentState) {
+				SpeachBubble.PercentVisible = 0.0f;
+			}
 		}
+	}
+
+	private OrderBubble SpeachBubble {
+		get => GetNode<OrderBubble>("OrderBubble");
 	}
 
 
@@ -45,6 +58,10 @@ public partial class Npc : Node2D
 
 		if (atTarget && CurrentState == State.WALK_OUT) {
 			QueueFree();
+		}
+
+		if (CurrentState == State.ORDERING) {
+			SpeachBubble.PercentVisible += 1.0f * ((float)delta);
 		}
 
 		

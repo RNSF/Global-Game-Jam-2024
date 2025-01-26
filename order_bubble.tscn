@@ -7,16 +7,12 @@
 
 [node name="OrderBubble" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 14798.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_25yff")
-Text = "[center]One more Thing as well
-and that is it!as"
 Padding = Vector2(40, 20)
+PercentVisible = 1.0
+Text = "[center]One more Thing as well
+and that is it!"
 
 [node name="Triangle" type="TextureRect" parent="."]
 layout_mode = 0
@@ -45,10 +41,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -130.5
-offset_top = -41.0
-offset_right = 130.5
-offset_bottom = 41.0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 281.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -56,5 +52,5 @@ theme_override_fonts/normal_font = ExtResource("4_cbs1r")
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[center]One more Thing as well
-and that is it!as"
+and that is it!"
 scroll_active = false

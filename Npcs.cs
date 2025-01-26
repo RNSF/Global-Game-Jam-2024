@@ -54,6 +54,7 @@ public partial class Npcs : Node2D
 		npc.spawnPoint = spawnPoint;
 		npc.endPoint = endingPoint;
 		AddChild(npc);
+		npc.CurrentState = Npc.State.WALK_IN;
 
 		GD.Print("Spawning NPC!");
 

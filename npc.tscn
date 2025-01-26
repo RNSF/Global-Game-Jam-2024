@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://s4c0xi4t2o62"]
+[gd_scene load_steps=4 format=3 uid="uid://s4c0xi4t2o62"]
 
 [ext_resource type="Script" path="res://Npc.cs" id="1_k5ihh"]
 [ext_resource type="Texture2D" uid="uid://ddr1yifyaxyqp" path="res://temp_assets/cowboy.png" id="1_qfb3y"]
+[ext_resource type="PackedScene" uid="uid://dhbidavdfsggp" path="res://order_bubble.tscn" id="3_5od2i"]
 
 [node name="Npc" type="Node2D"]
 script = ExtResource("1_k5ihh")
@@ -10,3 +11,11 @@ script = ExtResource("1_k5ihh")
 position = Vector2(9.99998, 84)
 scale = Vector2(0.699275, 0.699275)
 texture = ExtResource("1_qfb3y")
+
+[node name="OrderBubble" parent="." instance=ExtResource("3_5od2i")]
+visible = false
+offset_left = 4.0
+offset_top = -130.0
+offset_right = 4.0
+offset_bottom = -130.0
+Text = "[center]Alright pin head, your time is up."
