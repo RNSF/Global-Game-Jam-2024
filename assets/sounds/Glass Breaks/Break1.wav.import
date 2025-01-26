@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b70kt4gj5dweo"
+path="res://.godot/imported/Break1.wav-0ae876b15bc0c5b71f6416130a9ef0e4.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Glass Breaks/Break1.wav"
+dest_files=["res://.godot/imported/Break1.wav-0ae876b15bc0c5b71f6416130a9ef0e4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbdmpcekvkbt"]
+[gd_scene load_steps=3 format=3 uid="uid://dnu0kch8ygmho"]
 
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_irims"]
 [ext_resource type="Texture2D" uid="uid://dj8u1ocj25ux5" path="res://assets/Bottle02.png" id="2_0w4yp"]
@@ -7,6 +7,7 @@
 sodaType = 1
 
 [node name="Bottle" parent="." index="0"]
+position = Vector2(0, 0)
 scale = Vector2(1, 1)
 texture = ExtResource("2_0w4yp")
 

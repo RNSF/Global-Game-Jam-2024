@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cber3u6bpcuqp"]
+[gd_scene load_steps=12 format=3 uid="uid://cber3u6bpcuqp"]
 
 [ext_resource type="Script" path="res://Glass.cs" id="1_svax4"]
 [ext_resource type="Texture2D" uid="uid://cs4xsgwr3s67b" path="res://assets/BarGlass.png" id="2_rud73"]
 [ext_resource type="PackedScene" uid="uid://c3pbxn4cc7sgf" path="res://soda_surface.tscn" id="3_ebkfu"]
+[ext_resource type="AudioStream" uid="uid://dov5t0knm0d0w" path="res://assets/sounds/Bottle Klinks/GlassKlink1.wav" id="4_qd8b1"]
+[ext_resource type="AudioStream" uid="uid://ht1koaxle7g1" path="res://assets/sounds/Bottle Klinks/GlassKlink2.wav" id="5_57jb4"]
+[ext_resource type="AudioStream" uid="uid://dhu3asslv5p0q" path="res://assets/sounds/Bottle_Table/BottleOnTable1.wav" id="6_i7a5q"]
+[ext_resource type="AudioStream" uid="uid://cggciwkad208i" path="res://assets/sounds/Bottle_Table/BottleOnTable2.wav" id="7_8d0sl"]
+[ext_resource type="AudioStream" uid="uid://baj4x8iq7i78h" path="res://assets/sounds/Bottle_Table/BottleOnTable3.wav" id="8_pk4b0"]
+[ext_resource type="AudioStream" uid="uid://deadbdt23cxnt" path="res://assets/sounds/Bottle_Table/BottleOnTable4.wav" id="9_otmsm"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xr1eu"]
+streams_count = 2
+stream_0/stream = ExtResource("4_qd8b1")
+stream_1/stream = ExtResource("5_57jb4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6cjvj"]
+streams_count = 4
+stream_0/stream = ExtResource("6_i7a5q")
+stream_1/stream = ExtResource("7_8d0sl")
+stream_2/stream = ExtResource("8_pk4b0")
+stream_3/stream = ExtResource("9_otmsm")
 
 [node name="Glass" type="RigidBody2D"]
 collision_layer = 24
@@ -36,3 +54,9 @@ offset_left = -253.0
 offset_top = -246.0
 offset_right = 259.0
 offset_bottom = 266.0
+
+[node name="GlassCollision" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_xr1eu")
+
+[node name="TableCollision" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_6cjvj")

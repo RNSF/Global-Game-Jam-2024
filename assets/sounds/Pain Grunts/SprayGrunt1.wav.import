@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvr7mextpufdb"
+path="res://.godot/imported/SprayGrunt1.wav-7cec2b586772686ea3ba1677d3b7567b.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Pain Grunts/SprayGrunt1.wav"
+dest_files=["res://.godot/imported/SprayGrunt1.wav-7cec2b586772686ea3ba1677d3b7567b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

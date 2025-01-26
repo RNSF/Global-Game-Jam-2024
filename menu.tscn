@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://xrxdsj3srtr6"]
+[gd_scene load_steps=6 format=3 uid="uid://bk7sv80mulb6"]
 
 [ext_resource type="FontFile" uid="uid://bcbrhj01os4y7" path="res://assets/Kalam/Kalam-Bold.ttf" id="1_rwuqb"]
 [ext_resource type="Script" path="res://Menu.cs" id="1_u1l7d"]
 [ext_resource type="Texture2D" uid="uid://cu6ttayaxpqew" path="res://assets/RecipesPaper.png" id="2_3i2v1"]
+[ext_resource type="AudioStream" uid="uid://gti87l6xikd" path="res://assets/sounds/Menu_Table/MenuFold1.wav" id="4_x3y7x"]
+[ext_resource type="AudioStream" uid="uid://3jkgakyf36lm" path="res://assets/sounds/Menu_Table/MenuFold2.wav" id="5_wuctv"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -49,3 +51,9 @@ vertical_alignment = 1
 [node name="RecipesContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+
+[node name="OpenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_x3y7x")
+
+[node name="CloseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wuctv")

@@ -18,6 +18,14 @@ public partial class Menu : Control
 		get => GetNode<Control>("UnactivePosition");
 	}
 
+	public AudioStreamPlayer OpenSound {
+		get => GetNode<AudioStreamPlayer>("OpenSound");
+	}
+
+	public AudioStreamPlayer CloseSound {
+		get => GetNode<AudioStreamPlayer>("CloseSound");
+	}
+
 	public bool isActive;
 
 	// Called when the node enters the scene tree for the first time.
@@ -36,8 +44,12 @@ public partial class Menu : Control
 		}
 
 		if (Engine.IsEditorHint()) return;
-		MouseEntered 	+= () => { isActive = true; };
-		MouseExited 	+= () => { isActive = false; };
+		MouseEntered 	+= () => { isActive = true; 
+			OpenSound.Play();
+		};
+		MouseExited 	+= () => { isActive = false; 
+			CloseSound.Play();
+		};
 
 		
 	}

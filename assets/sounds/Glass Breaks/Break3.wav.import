@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwpues65ncs2k"
+path="res://.godot/imported/Break3.wav-92ca11698643a170657e87e43c34fc14.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Glass Breaks/Break3.wav"
+dest_files=["res://.godot/imported/Break3.wav-92ca11698643a170657e87e43c34fc14.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

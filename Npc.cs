@@ -60,6 +60,17 @@ public partial class Npc : Node2D
 	[Signal]
 	public delegate void OrderFullfilledEventHandler();
 	
+	public AudioStreamPlayer KachingSound {
+		get => GetNode<AudioStreamPlayer>("Kaching");
+	}
+
+	public AudioStreamPlayer OrderSound {
+		get => GetNode<AudioStreamPlayer>("Order");
+	}
+
+	public AudioStreamPlayer AngerSound {
+		get => GetNode<AudioStreamPlayer>("Anger");
+	}
 
     public override void _Ready()
     {
@@ -111,6 +122,16 @@ public partial class Npc : Node2D
 
 			EmitSignal(SignalName.OrderFullfilled);
 			CurrentState = State.WALK_OUT;
+
+			if (percentPerfect > 0.7) {
+				KachingSound.Play();
+			} else if (percentPerfect > 0.5) {
+				OrderSound.Play();
+			} else {
+				AngerSound.Play();
+			}
+
+			
 		};
     }
 

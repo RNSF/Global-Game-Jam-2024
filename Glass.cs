@@ -36,13 +36,36 @@ public partial class Glass : RigidBody2D
 	int tick;
 	private Vector2 previousGlobalPosition;
 
+	public AudioStreamPlayer GlassCollisionSound {
+		get => GetNode<AudioStreamPlayer>("GlassCollision");
+	}
 
+	public AudioStreamPlayer TableCollisionSound {
+		get => GetNode<AudioStreamPlayer>("TableCollision");
+	}
 
     public override void _Ready()
     {
 		Debug.Assert(sodaFluid != null);
         innerShape = new ConvexPolygonShape2D();
 		innerShape.Points = InnerAreaShape.Polygon;
+
+		this.BodyEntered += (body) => {
+			
+			if (body is PhysicsBody2D physicsBody) {
+				var loudness = Mathf.Clamp(Mathf.Remap(LinearVelocity.Length(), 0.0f, 30.0f, 0.0f, 1.0f), 0.0f, 1.0f);
+				GD.Print(loudness);
+				if ((physicsBody.CollisionLayer & (CollisionLayers.BOTTLES | CollisionLayers.GLASS)) != 0) {
+					
+					GlassCollisionSound.VolumeDb = Mathf.LinearToDb(loudness);
+					GlassCollisionSound.Play();
+				} else {
+					TableCollisionSound.VolumeDb = Mathf.LinearToDb(loudness);
+					TableCollisionSound.Play();
+				}
+				
+			} 
+		};
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

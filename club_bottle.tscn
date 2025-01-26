@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://baxewn0mll8i5"]
+[gd_scene load_steps=3 format=3 uid="uid://cp7p4mgp4bub4"]
 
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_pucym"]
 [ext_resource type="Texture2D" uid="uid://n5afuc4n67gb" path="res://assets/Bottle04.png" id="2_ahqm5"]

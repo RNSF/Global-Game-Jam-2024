@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dqm15qcln6w26"]
+[gd_scene load_steps=22 format=3 uid="uid://dqm15qcln6w26"]
 
 [ext_resource type="PackedScene" uid="uid://cqtrueykh3fou" path="res://npc_spawn_point.tscn" id="1_blhfc"]
 [ext_resource type="Texture2D" uid="uid://bogdpkyw5qd8e" path="res://assets/BarBG.png" id="1_qaao2"]
@@ -7,13 +7,14 @@
 [ext_resource type="Script" path="res://Table.cs" id="4_ktyc2"]
 [ext_resource type="PackedScene" uid="uid://cber3u6bpcuqp" path="res://glass.tscn" id="4_oecaf"]
 [ext_resource type="Texture2D" uid="uid://dwstq72mevl26" path="res://assets/BarWorkbench.png" id="5_nx0io"]
-[ext_resource type="PackedScene" path="res://ginger_bottle.tscn" id="6_ocoeu"]
-[ext_resource type="PackedScene" path="res://cranberry_bottle.tscn" id="7_a4pkt"]
+[ext_resource type="PackedScene" uid="uid://2hm27v3ila3r" path="res://ginger_bottle.tscn" id="6_ocoeu"]
+[ext_resource type="PackedScene" uid="uid://dnu0kch8ygmho" path="res://cranberry_bottle.tscn" id="7_a4pkt"]
 [ext_resource type="Script" path="res://Npcs.cs" id="7_hk5re"]
-[ext_resource type="PackedScene" path="res://cola_bottle.tscn" id="8_8yhkq"]
-[ext_resource type="PackedScene" path="res://menu.tscn" id="8_56oin"]
-[ext_resource type="PackedScene" path="res://club_bottle.tscn" id="9_p2v4p"]
+[ext_resource type="PackedScene" uid="uid://b38ra30ep5fhu" path="res://cola_bottle.tscn" id="8_8yhkq"]
+[ext_resource type="PackedScene" uid="uid://bk7sv80mulb6" path="res://menu.tscn" id="8_56oin"]
+[ext_resource type="PackedScene" uid="uid://cp7p4mgp4bub4" path="res://club_bottle.tscn" id="9_p2v4p"]
 [ext_resource type="Texture2D" uid="uid://b2cgmu3wkiox" path="res://assets/BarCounter.png" id="10_u0f3d"]
+[ext_resource type="AudioStream" uid="uid://cifuopl4utm2" path="res://assets/sounds/SaloonMusic.wav" id="15_4j27a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1eixp"]
 size = Vector2(1967, 605)
@@ -79,14 +80,17 @@ sodaFluid = NodePath("../SodaFluid")
 
 [node name="CranberryBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("7_a4pkt")]
 position = Vector2(-831, 215)
+max_contacts_reported = 0
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="ColaBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("8_8yhkq")]
 position = Vector2(-648, 197)
+max_contacts_reported = 0
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="ClubBottle" parent="." node_paths=PackedStringArray("sodaFluid") instance=ExtResource("9_p2v4p")]
 position = Vector2(-373, 181)
+max_contacts_reported = 0
 sodaFluid = NodePath("../SodaFluid")
 
 [node name="Table" type="RigidBody2D" parent="." node_paths=PackedStringArray("sodaFluid")]
@@ -187,3 +191,7 @@ offset_top = 350.0
 offset_right = 412.0
 offset_bottom = 350.0
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_4j27a")
+autoplay = true

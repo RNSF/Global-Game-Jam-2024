@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6ak4vqyh046y"
+path="res://.godot/imported/BottleFizz1.wav-d590ab9d3c904184bb123f3d0babc288.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Bottle Fizz/BottleFizz1.wav"
+dest_files=["res://.godot/imported/BottleFizz1.wav-d590ab9d3c904184bb123f3d0babc288.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
