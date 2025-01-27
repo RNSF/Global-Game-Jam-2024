@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://SodaSurface.cs" id="1_rn2qe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ynn"]
+resource_local_to_scene = true
 shader = ExtResource("1_dj5h4")
 shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/line_thickness = 3.0

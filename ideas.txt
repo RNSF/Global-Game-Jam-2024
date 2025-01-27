@@ -24,7 +24,7 @@ Sounds Effects:
 - Glass/bottle break sound
 
 - Customer grunts (ordering)
-- Customer ARRRGGH (for when they are sprayed with soda)
+- Customer ARRRGGH (for if they are sprayed with soda)
 - Success sound (ka-ching)
 - Glass filling up sound (should be repeating, can modulate pitch in engine)
 - Bottle shaking sound
