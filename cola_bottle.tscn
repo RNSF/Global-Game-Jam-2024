@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://b38ra30ep5fhu"]
+[gd_scene load_steps=5 format=3 uid="uid://b38ra30ep5fhu"]
 
 [ext_resource type="PackedScene" uid="uid://dlu6sfs58qdfd" path="res://bottle.tscn" id="1_0hwma"]
 [ext_resource type="Texture2D" uid="uid://b1mrl2eek0428" path="res://assets/Bottle03.png" id="2_fpp5l"]
+[ext_resource type="Shader" path="res://bottle.gdshader" id="2_ycdjn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgcj6"]
+resource_local_to_scene = true
+shader = ExtResource("2_ycdjn")
+shader_parameter/color = Color(1, 0.403922, 0, 1)
+shader_parameter/width = 8.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = true
 
 [node name="ColaBottle" instance=ExtResource("1_0hwma")]
 sodaType = 3
 
 [node name="Bottle" parent="." index="0"]
+material = SubResource("ShaderMaterial_vgcj6")
 position = Vector2(0, 0)
 scale = Vector2(1, 1)
 texture = ExtResource("2_fpp5l")

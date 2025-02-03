@@ -121,13 +121,11 @@ texture = ExtResource("6_yvug8")
 [node name="Sprite2D4" type="Sprite2D" parent="Controls/Sprite2D2"]
 show_behind_parent = true
 position = Vector2(-27.4999, -40)
-scale = Vector2(1, 1)
 texture = ExtResource("7_5sc50")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Controls/Sprite2D2"]
 show_behind_parent = true
 position = Vector2(27.5001, -42.5)
-scale = Vector2(1, 1)
 texture = ExtResource("7_5sc50")
 flip_h = true
 
