@@ -40,6 +40,10 @@ public partial class Glass : RigidBody2D
 		get => GetNode<AudioStreamPlayer>("GlassCollision");
 	}
 
+	public AudioStreamPlayer FillSound {
+		get => GetNode<AudioStreamPlayer>("FillSound");
+	}
+
     public override void _Ready()
     {
 		Debug.Assert(sodaFluid != null);
@@ -81,6 +85,7 @@ public partial class Glass : RigidBody2D
 		var results = SodaCheck();
 
 		sodaComposition = new float[Enum.GetNames(typeof(Soda.Type)).Length];
+		var oldSodaVolume = sodaVolume;
 		sodaVolume = 0.0f;
 		fizzLevel = 0.0f;
 
@@ -127,6 +132,15 @@ public partial class Glass : RigidBody2D
 
 		previousGlobalPosition = GlobalPosition;
 		tick ++;
+
+		float volumePercent = Math.Clamp(sodaVolume / 8000, 0.0f, 1.0f);
+		FillSound.VolumeDb = Mathf.LinearToDb(Mathf.Lerp(Mathf.DbToLinear(FillSound.VolumeDb), 0.0f, 8.0f * ((float)delta)));
+		FillSound.PitchScale = Mathf.Lerp(0.4f, 2.0f, volumePercent);
+
+		if (sodaVolume - oldSodaVolume > 10.0f) {
+			FillSound.VolumeDb = Mathf.LinearToDb(Mathf.Lerp(1.0f, 0.0f, volumePercent));
+			GD.Print(sodaVolume);
+		}
 
 	}
 

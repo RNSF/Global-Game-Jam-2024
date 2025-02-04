@@ -108,7 +108,6 @@ public partial class Bottle : RigidBody2D
 		var averagePreviousLinearVelocity = previousLinearVelocities.Aggregate(Vector2.Zero, (acc, x) => acc + x) / previousLinearVelocities.Length;
 
 		if (previousLinearVelocities[tick % previousLinearVelocities.Length].Length() > 100 && averagePreviousLinearVelocity.Normalized().Dot(LinearVelocity.Normalized()) < 0.2 && acceleration > 500) {
-			GD.Print("PLAY");
 			ShakeSound.Play();
 		}
 

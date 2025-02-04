@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cber3u6bpcuqp"]
+[gd_scene load_steps=13 format=3 uid="uid://cber3u6bpcuqp"]
 
 [ext_resource type="Script" path="res://Glass.cs" id="1_svax4"]
 [ext_resource type="Texture2D" uid="uid://cs4xsgwr3s67b" path="res://assets/BarGlass.png" id="2_rud73"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cggciwkad208i" path="res://assets/sounds/Bottle_Table/BottleOnTable2.wav" id="7_8d0sl"]
 [ext_resource type="AudioStream" uid="uid://baj4x8iq7i78h" path="res://assets/sounds/Bottle_Table/BottleOnTable3.wav" id="8_pk4b0"]
 [ext_resource type="AudioStream" uid="uid://deadbdt23cxnt" path="res://assets/sounds/Bottle_Table/BottleOnTable4.wav" id="9_otmsm"]
+[ext_resource type="AudioStream" uid="uid://c1qjipsc2w1lo" path="res://assets/sounds/BottleFill/Saloon_BottleFizz_Fill.wav" id="10_64gpd"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xr1eu"]
 streams_count = 2
@@ -60,3 +61,8 @@ stream = SubResource("AudioStreamRandomizer_xr1eu")
 
 [node name="TableCollision" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_6cjvj")
+
+[node name="FillSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_64gpd")
+volume_db = -80.0
+autoplay = true
