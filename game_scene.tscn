@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dnu0kch8ygmho" path="res://cranberry_bottle.tscn" id="7_a4pkt"]
 [ext_resource type="Script" path="res://Npcs.cs" id="7_hk5re"]
 [ext_resource type="PackedScene" uid="uid://b38ra30ep5fhu" path="res://cola_bottle.tscn" id="8_8yhkq"]
-[ext_resource type="PackedScene" uid="uid://bk7sv80mulb6" path="res://menu.tscn" id="8_56oin"]
+[ext_resource type="PackedScene" path="res://menu.tscn" id="8_56oin"]
 [ext_resource type="FontFile" uid="uid://bcbrhj01os4y7" path="res://assets/Kalam/Kalam-Bold.ttf" id="8_px2od"]
 [ext_resource type="Texture2D" uid="uid://d3iwl6lj2gbaf" path="res://assets/space.png" id="9_dmf7t"]
 [ext_resource type="PackedScene" uid="uid://cp7p4mgp4bub4" path="res://club_bottle.tscn" id="9_p2v4p"]

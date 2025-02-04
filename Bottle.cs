@@ -1,9 +1,12 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 public partial class Bottle : RigidBody2D
 {
+
+	
 
 	[Export]
 	public SodaFluid sodaFluid;
@@ -17,7 +20,7 @@ public partial class Bottle : RigidBody2D
 	private float pourRate = 5.0f;
 
 	private float fizzLevel = 0.0f;
-	private Vector2 previousLinearVelocity = Vector2.Zero;
+	Vector2[] previousLinearVelocities = new Vector2[10];
 	private Noise noise;
 
 	
@@ -34,6 +37,12 @@ public partial class Bottle : RigidBody2D
 	public AudioStreamPlayer BottleCollisionSound {
 		get => GetNode<AudioStreamPlayer>("BottleCollision");
 	}
+
+	public AudioStreamPlayer ShakeSound {
+		get => GetNode<AudioStreamPlayer>("ShakeSound");
+	}
+
+	int tick;
 
 	
 
@@ -65,6 +74,8 @@ public partial class Bottle : RigidBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
 	{
+		
+
 		if (isPickedUp && Input.IsActionPressed("pour")) {
 			pourTimer -= ((float)delta);
 
@@ -79,11 +90,18 @@ public partial class Bottle : RigidBody2D
 			pourTimer += 1.0f / pourRate;
 		}
 		
-		var acceleration = (LinearVelocity - previousLinearVelocity).Length() / ((float)delta);
+		var acceleration = (LinearVelocity - previousLinearVelocities[tick % previousLinearVelocities.Length]).Length() / ((float)delta);
 		
 		fizzLevel += acceleration / 80000 * (float) delta;
 		fizzLevel -= (isPickedUp ? 0.05f  : 0.1f )* (float) delta;
 		fizzLevel = Mathf.Clamp(fizzLevel, 0.0f, 1.0f);
+
+		var averagePreviousLinearVelocity = previousLinearVelocities.Aggregate(Vector2.Zero, (acc, x) => acc + x) / previousLinearVelocities.Length;
+
+		if (previousLinearVelocities[tick % previousLinearVelocities.Length].Length() > 100 && averagePreviousLinearVelocity.Normalized().Dot(LinearVelocity.Normalized()) < 0.2 && acceleration > 500) {
+			GD.Print("PLAY");
+			ShakeSound.Play();
+		}
 
 		BottleSprite.Position = new Vector2(noise.GetNoise2D(Time.GetTicksMsec(), 0), noise.GetNoise2D(0, Time.GetTicksMsec()))
 			* fizzLevel * 30.0f;
@@ -94,8 +112,8 @@ public partial class Bottle : RigidBody2D
 			shaderMaterial.SetShaderParameter("width", Mathf.Lerp(4.0f, 8.0f, fizzLevel));
 		}
 
-
-		previousLinearVelocity = LinearVelocity;
+		tick += 1;
+		previousLinearVelocities[tick % previousLinearVelocities.Length] = LinearVelocity;
 	}
 
 	

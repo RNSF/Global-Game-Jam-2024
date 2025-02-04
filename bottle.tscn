@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlu6sfs58qdfd"]
+[gd_scene load_steps=20 format=3 uid="uid://dlu6sfs58qdfd"]
 
 [ext_resource type="Texture2D" uid="uid://dce65ud1fbc71" path="res://temp_assets/bottle.png" id="1_7ri3n"]
 [ext_resource type="Script" path="res://Bottle.cs" id="1_uy06r"]
@@ -7,8 +7,14 @@
 [ext_resource type="AudioStream" uid="uid://b4xvgmxhhqtdd" path="res://assets/sounds/Bottle Klinks/BottleKlink2.wav" id="5_pa174"]
 [ext_resource type="AudioStream" uid="uid://dhu3asslv5p0q" path="res://assets/sounds/Bottle_Table/BottleOnTable1.wav" id="8_juwo5"]
 [ext_resource type="AudioStream" uid="uid://cggciwkad208i" path="res://assets/sounds/Bottle_Table/BottleOnTable2.wav" id="9_c0k4a"]
+[ext_resource type="AudioStream" uid="uid://dnm8ho38bgo7" path="res://assets/sounds/Bottle Shake/Saloon_Swirl_OneShot2.wav" id="10_5a4ua"]
 [ext_resource type="AudioStream" uid="uid://baj4x8iq7i78h" path="res://assets/sounds/Bottle_Table/BottleOnTable3.wav" id="10_wpu5v"]
 [ext_resource type="AudioStream" uid="uid://deadbdt23cxnt" path="res://assets/sounds/Bottle_Table/BottleOnTable4.wav" id="11_dw0fx"]
+[ext_resource type="AudioStream" uid="uid://8tuiq5lvb7uo" path="res://assets/sounds/Bottle Shake/Saloon_Swirl_OneShot3.wav" id="11_k2nm6"]
+[ext_resource type="AudioStream" uid="uid://chxub3y46veg0" path="res://assets/sounds/Bottle Shake/Saloon_Swirl_OneShot4.wav" id="12_pfrx2"]
+[ext_resource type="AudioStream" uid="uid://bxa7uufd7nhdd" path="res://assets/sounds/Bottle Shake/Saloon_Swirl_OneShot5.wav" id="13_gk64s"]
+[ext_resource type="AudioStream" uid="uid://ow5y2mt6eo88" path="res://assets/sounds/Bottle Shake/Saloon_Swirl_OneShot6.wav" id="14_pkcid"]
+[ext_resource type="AudioStream" uid="uid://3wt6lq8qnucd" path="res://assets/sounds/Bottle Shake/Saloon_Swirl_OneShot7.wav" id="15_ay0td"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vg1ik"]
 resource_local_to_scene = true
@@ -30,6 +36,16 @@ stream_0/stream = ExtResource("8_juwo5")
 stream_1/stream = ExtResource("9_c0k4a")
 stream_2/stream = ExtResource("10_wpu5v")
 stream_3/stream = ExtResource("11_dw0fx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pofj6"]
+random_pitch = 1.1
+streams_count = 6
+stream_0/stream = ExtResource("10_5a4ua")
+stream_1/stream = ExtResource("11_k2nm6")
+stream_2/stream = ExtResource("12_pfrx2")
+stream_3/stream = ExtResource("13_gk64s")
+stream_4/stream = ExtResource("14_pkcid")
+stream_5/stream = ExtResource("15_ay0td")
 
 [node name="Bottle" type="RigidBody2D"]
 collision_layer = 81
@@ -56,3 +72,7 @@ stream = SubResource("AudioStreamRandomizer_ligkd")
 
 [node name="TableCollision" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_xuc31")
+
+[node name="ShakeSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_pofj6")
+max_polyphony = 10
