@@ -42,6 +42,10 @@ public partial class Bottle : RigidBody2D
 		get => GetNode<AudioStreamPlayer>("ShakeSound");
 	}
 
+	public AudioStreamPlayer FizzSound {
+		get => GetNode<AudioStreamPlayer>("FizzSound");
+	}
+
 	int tick;
 
 	
@@ -74,7 +78,7 @@ public partial class Bottle : RigidBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
 	{
-		
+		var isPouring = false;
 
 		if (isPickedUp && Input.IsActionPressed("pour")) {
 			pourTimer -= ((float)delta);
@@ -82,6 +86,8 @@ public partial class Bottle : RigidBody2D
 			while (pourTimer < 0.0) {
 				pourTimer += 1.0f / pourRate;
 			}
+			
+			isPouring = true;
 
 			sodaFluid.CreateParticle(FluidSpawnPoint.GlobalPosition, Vector2.Up.Rotated(GlobalRotation) * fizzLevel * 2000.0f, fizzLevel, sodaType);
 
@@ -95,6 +101,9 @@ public partial class Bottle : RigidBody2D
 		fizzLevel += acceleration / 80000 * (float) delta;
 		fizzLevel -= (isPickedUp ? 0.05f  : 0.1f )* (float) delta;
 		fizzLevel = Mathf.Clamp(fizzLevel, 0.0f, 1.0f);
+
+		FizzSound.VolumeDb = Mathf.LinearToDb(fizzLevel / 2 + 0.5f * (isPouring ? 1.0f : 0.0f));
+		FizzSound.PitchScale = isPouring ? 1.0f : 0.7f;
 
 		var averagePreviousLinearVelocity = previousLinearVelocities.Aggregate(Vector2.Zero, (acc, x) => acc + x) / previousLinearVelocities.Length;
 
